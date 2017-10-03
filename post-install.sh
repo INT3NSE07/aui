@@ -5,4 +5,4 @@ if [ $EUID != 0 ]; then
     exit $?
 fi
 
-sudo ./fifo
+sudo ./lilo
