@@ -2860,13 +2860,12 @@ install_extra(){
 #FINISH {{{
 finish(){
   print_title "WARNING: PACKAGES INSTALLED FROM AUR"
-  print_danger "List of packages not officially supported that may kill your cat:"
+  print_danger "List of packages not officially supported:"
   pause_function
   AUR_PKG_LIST="${AUI_DIR}/aur_pkg_list.log"
   pacman -Qm | awk '{print $1}' > $AUR_PKG_LIST
   less $AUR_PKG_LIST
-  print_title "INSTALL COMPLETED"
-  echo -e "Thanks for using the Archlinux Ultimate Install script by helmuthdu\n"
+  print_title "Installation completed"
   #REBOOT
   read -p "Reboot your system [y/N]: " OPTION
   [[ $OPTION == y ]] && reboot
