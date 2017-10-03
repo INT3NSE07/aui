@@ -844,7 +844,8 @@ root_password(){
 finish(){
   print_title "Installation completed"
   #COPY AUI TO ROOT FOLDER IN THE NEW SYSTEM
-  cp -R `pwd` ${MOUNTPOINT}/root
+  mkdir ${MOUNTPOINT}/root/arch-scripts
+  cp -R `pwd` ${MOUNTPOINT}/root/arch-scripts
   read_input_text "Reboot system"
   if [[ $OPTION == y ]]; then
     umount_partitions
