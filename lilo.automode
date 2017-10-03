@@ -346,8 +346,8 @@
   # 2) LAPP - APACHE, POSTGRESQL & PHP
   # 3) LEMP - NGINX, MariaDB & PHP
   # 4) LEPP - NGINX, POSTGRESQL & PHP
-  WEBSERVER=4
-  POSTGIS="n"
+  WEBSERVER=""
+  POSTGIS=""
 #}}}
 #FONTS {{{
   # 1) ttf-dejavu
