@@ -35,15 +35,15 @@
   MAINMENU="1-13 15"
 #}}}
 #BASIC SETUP {{{
-  CUPS="y"
+  CUPS="n"
   CUSTOMREPO="n"         # Add custom repositories
-  FIRMWARE="y"           # Install custom firmwares
+  FIRMWARE="n"           # Install custom firmwares
   NFS="n"
   READAHEAD="y"
-  SAMBA="y"
+  SAMBA="n"
   SSH="y"
   TLP="n"                # Laptop Power Manager
-  ZRAM="y"
+  ZRAM="n"
   ZSH="y"
   OH_MY_ZSH="y"
   PROPRIETARY_DRIVER="n" # Proprietary (NVIDIA) driver
@@ -80,7 +80,7 @@
   #12) i3
   #13) OpenBox
   #14) Xmonad
-  DESKTOPENV=4
+  DESKTOPENV=12
   #KDE {{{
     # 1) Choqok
     # 2) Digikam
@@ -146,7 +146,7 @@
   # 9) Shutter|Hotshots
   #10) Tilix
   #11) Terminator
-  ACCESSORIES_OPTIONS="10"
+  ACCESSORIES_OPTIONS="5"
 #}}}
 #DEVELOPEMENT {{{
   # 1) Atom
@@ -164,7 +164,7 @@
   #13) OracleJDK
   #14) NodeJS
   #15) Microsoft Visual Studio Code
-  DEVELOPMENT_OPTIONS="13"
+  DEVELOPMENT_OPTIONS="12"
 #}}}
 #OFFICE {{{
   # 1) Abiword+Gnumeric|Calligra
@@ -196,7 +196,7 @@
   #13) Wine
   #14) netdata
   #15) nload
-  SYSTEMTOOLS_OPTIONS="10"
+  SYSTEMTOOLS_OPTIONS="5 8"
 #}}}
 #GRAPHICS {{{
   # 1) Blender
@@ -209,7 +209,7 @@
   # 8) Scribus
   # 9) Shotwell
   #10) Simple Scan
-  GRAPHICS_OPTIONS="2-7 9"
+  GRAPHICS_OPTIONS="4 9"
 #}}}
 #INTERNET {{{
   # 1) Browser
@@ -226,7 +226,7 @@
     # 4) Midori|Konqueror
     # 5) Opera
     # 6) Vivaldi
-    BROWSERS_OPTIONS="3"
+    BROWSERS_OPTIONS="1"
   #}}}
   #DOWNLOAD|FILESHARE {{{
     # 1) AeroFS
@@ -242,7 +242,7 @@
     #11) uGet
     #12) youtube-dl
     #13) tixati
-    DOWNLOAD_OPTIONS=""
+    DOWNLOAD_OPTIONS="12"
   #}}}
   #EMAIL|RSS {{{
     # 1) Liferea
@@ -259,7 +259,7 @@
     # 7) Telegram Desktop
     # 8) qTox
     # 9) discord
-    IM_OPTIONS="4"
+    IM_OPTIONS="7"
   #}}}
   #MAPPING {{{
     # 1) Google Earth
@@ -300,7 +300,7 @@
     # 2) Easytag
     # 3) OcenAudio
     # 4) Soundconverter|Soundkonverter
-    AUDIO_EDITOR_OPTIONS="2"
+    AUDIO_EDITOR_OPTIONS=""
   #}}}
 #}}}
 #VIDEO {{{
@@ -331,7 +331,7 @@
     # 8) Openshot
     # 9) Pitivi
     #10) Transmageddon
-    VIDEO_EDITOR_OPTIONS="1"
+    VIDEO_EDITOR_OPTIONS=""
   #}}}
 #}}}
 #GAMES {{{
