@@ -29,7 +29,7 @@ fi
 #WELCOME {{{
 welcome(){
   clear
-  echo -e "${Bold}Welcome to the Archlinux U Install script by helmuthdu${White}"
+  echo -e "${Bold}Archlinux installation script${White}"
   print_line
   echo "Requirements:"
   echo "-> Archlinux installation"
@@ -37,8 +37,6 @@ welcome(){
   echo "-> Working internet connection"
   print_line
   echo "Script can be cancelled at any time with CTRL+C"
-  print_line
-  echo "http://www.github.com/helmuthdu/aui"
   print_line
   echo -e "\nBackups:"
   print_line
@@ -98,7 +96,7 @@ language_selector(){
   fi
   #}}}
   #}}}
-  print_title "LOCALE - https://wiki.archlinux.org/index.php/Locale"
+  print_title "locale - https://wiki.archlinux.org/index.php/Locale"
   print_info "Locales are used in Linux to define which language the user uses. As the locales define the character sets being used as well, setting up the correct locale is especially important if the language contains non-ASCII characters."
   read -p "Default system language: \"$LOCALE\" [Y/n]: " OPTION
   case "$OPTION" in
@@ -177,7 +175,7 @@ select_user(){
   #CONFIGURE USER ACCOUNT {{{
   configure_user_account(){
     #BASHRC {{{
-    print_title "BASHRC - https://wiki.archlinux.org/index.php/Bashrc"
+    print_title "bashrc - https://wiki.archlinux.org/index.php/Bashrc"
     bashrc_list=("Default" "Vanilla" "Get from github");
     PS3="$prompt1"
     echo -e "Choose your .bashrc\n"
@@ -210,7 +208,7 @@ select_user(){
     done
     #}}}
     #EDITOR {{{
-    print_title "DEFAULT EDITOR"
+    print_title "Default editor"
     editors_list=("emacs" "nano" "vi" "vim" "neovim" "zile");
     PS3="$prompt1"
     echo -e "Select editor\n"
@@ -273,7 +271,7 @@ select_user(){
     chown -R ${username}:users /home/${username}
   }
   #}}}
-  print_title "SELECT/CREATE USER - https://wiki.archlinux.org/index.php/Users_and_Groups"
+  print_title "Select/Create user - https://wiki.archlinux.org/index.php/Users_and_Groups"
   users_list=(`cat /etc/passwd | grep "/home" | cut -d: -f1`);
   PS3="$prompt1"
   echo "Avaliable Users:"
@@ -302,7 +300,7 @@ select_user(){
 #CONFIGURE SUDO {{{
 configure_sudo(){
   if ! is_package_installed "sudo" ; then
-    print_title "SUDO - https://wiki.archlinux.org/index.php/Sudo"
+    print_title "sudo - https://wiki.archlinux.org/index.php/Sudo"
     package_install "sudo"
   fi
   #CONFIGURE SUDOERS {{{
@@ -330,7 +328,7 @@ configure_sudo(){
 #}}}
 #AUR HELPER {{{
 choose_aurhelper(){
-  print_title "AUR HELPER - https://wiki.archlinux.org/index.php/AUR_Helpers"
+  print_title "AUR helper - https://wiki.archlinux.org/index.php/AUR_Helpers"
   print_info "AUR Helpers are written to make using the Arch User Repository more comfortable."
   print_warning "\tNone of these tools are officially supported by Arch devs."
   aurhelper=("yaourt" "apacman" "pacaur")
@@ -339,8 +337,8 @@ choose_aurhelper(){
   select OPT in "${aurhelper[@]}"; do
     case "$REPLY" in
       1)
-        print_title "YAOURT - https://wiki.archlinux.org/index.php/Yaourt"
-        print_info "Yaourt (Yet AnOther User Repository Tool) is a community-contributed wrapper for pacman which adds seamless access to the AUR, allowing and automating package compilation and installation from your choice of the thousands of PKGBUILDs in the AUR, in addition to the many thousands of available Arch Linux binary packages."
+        print_title "yaourt - https://wiki.archlinux.org/index.php/Yaourt"
+        print_info "yaourt (Yet AnOther User Repository Tool) is a community-contributed wrapper for pacman which adds seamless access to the AUR, allowing and automating package compilation and installation from your choice of the thousands of PKGBUILDs in the AUR, in addition to the many thousands of available Arch Linux binary packages."
         if ! is_package_installed "yaourt" ; then
           package_install "base-devel yajl namcap"
           pacman -D --asdeps yajl namcap
@@ -393,7 +391,7 @@ choose_aurhelper(){
 #}}}
 #AUTOMODE {{{
 automatic_mode(){
-  print_title "AUTOMODE"
+  print_title "Automode"
   print_info "Create a custom install with all options pre-selected.\nUse this option with care."
   print_danger "\tUse this mode only if you already know all the option.\n\tYou won't be able to select anything later."
   read_input_text "Enable Automatic Mode"
@@ -408,12 +406,12 @@ automatic_mode(){
 #}}}
 #CUSTOM REPOSITORIES {{{
 add_custom_repositories(){
-  print_title "CUSTOM REPOSITORIES - https://wiki.archlinux.org/index.php/Unofficial_User_Repositories"
+  print_title "Custom Repositories - https://wiki.archlinux.org/index.php/Unofficial_User_Repositories"
   read_input_text "Add custom repositories" $CUSTOMREPO
   if [[ $OPTION == y ]]; then
     while true
     do
-      print_title "CUSTOM REPOSITORIES - https://wiki.archlinux.org/index.php/Unofficial_User_Repositories"
+      print_title "Custom Repositories - https://wiki.archlinux.org/index.php/Unofficial_User_Repositories"
       echo " 1) \"Add new repository\""
       echo ""
       echo " d) DONE"
@@ -439,13 +437,13 @@ add_custom_repositories(){
 #}}}
 #BASIC SETUP {{{
 install_basic_setup(){
-  print_title "BASH TOOLS - https://wiki.archlinux.org/index.php/Bash"
+  print_title "Bash tools - https://wiki.archlinux.org/index.php/Bash"
   package_install "bc rsync mlocate bash-completion pkgstats arch-wiki-lite"
   pause_function
-  print_title "(UN)COMPRESS TOOLS - https://wiki.archlinux.org/index.php/P7zip"
+  print_title "(UN)Compression tools - https://wiki.archlinux.org/index.php/P7zip"
   package_install "zip unzip unrar p7zip lzop cpio"
   pause_function
-  print_title "AVAHI - https://wiki.archlinux.org/index.php/Avahi"
+  print_title "avahi - https://wiki.archlinux.org/index.php/Avahi"
   print_info "Avahi is a free Zero Configuration Networking (Zeroconf) implementation, including a system for multicast DNS/DNS-SD discovery. It allows programs to publish and discovers services and hosts running on a local network with no specific configuration."
   package_install "avahi nss-mdns"
   is_package_installed "avahi" && system_ctl enable avahi-daemon
@@ -454,7 +452,7 @@ install_basic_setup(){
   print_info "The Advanced Linux Sound Architecture (ALSA) is a Linux kernel component intended to replace the original Open Sound System (OSSv3) for providing device drivers for sound cards."
   package_install "alsa-utils alsa-plugins"
   pause_function
-  print_title "PULSEAUDIO - https://wiki.archlinux.org/index.php/Pulseaudio"
+  print_title "Pulseaudio - https://wiki.archlinux.org/index.php/Pulseaudio"
   print_info "PulseAudio is the default sound server that serves as a proxy to sound applications using existing kernel sound components like ALSA or OSS"
   package_install "pulseaudio pulseaudio-alsa"
   pause_function
@@ -550,7 +548,7 @@ install_zsh(){
 #}}}
 #SAMBA {{{
 install_samba(){
-  print_title "SAMBA - https://wiki.archlinux.org/index.php/Samba"
+  print_title "Samba - https://wiki.archlinux.org/index.php/Samba"
   print_info "Samba is a re-implementation of the SMB/CIFS networking protocol, it facilitates file and printer sharing among Linux and Windows systems as an alternative to NFS."
   read_input_text "Install Samba" $SAMBA
   if [[ $OPTION == y ]]; then
@@ -624,7 +622,7 @@ install_tlp(){
 #}}}
 #XORG {{{
 install_xorg(){
-  print_title "XORG - https://wiki.archlinux.org/index.php/Xorg"
+  print_title "Xorg - https://wiki.archlinux.org/index.php/Xorg"
   print_info "Xorg is the public, open-source implementation of the X window system version 11."
   echo "Installing X-Server (req. for Desktopenvironment, GPU Drivers, Keyboardlayout,...)"
   package_install "xorg-server xorg-apps xorg-server-xwayland xorg-xinit xorg-xkill xorg-xinput xf86-input-libinput"
@@ -635,7 +633,7 @@ install_xorg(){
 #}}}
 #FONT CONFIGURATION {{{
 font_config(){
-  print_title "FONTS CONFIGURATION - https://wiki.archlinux.org/index.php/Font_Configuration"
+  print_title "Fonts Configuration - https://wiki.archlinux.org/index.php/Font_Configuration"
   print_info "Fontconfig is a library designed to provide a list of available fonts to applications, and also for configuration for how fonts get rendered."
   read_input_text "Install Fontconfig" $FONTCONFIG
   if [[ $OPTION == y ]]; then
@@ -647,7 +645,7 @@ font_config(){
 #VIDEO CARDS {{{
 install_video_cards(){
   package_install "dmidecode"
-  print_title "VIDEO CARD"
+  print_title "Video card"
   check_vga
   #Virtualbox {{{
   if [[ ${VIDEO_DRIVER} == virtualbox ]]; then
@@ -819,7 +817,7 @@ install_desktop_environment(){
   install_icon_theme() { #{{{
     while true
     do
-      print_title "GNOME ICONS"
+      print_title "Gnome Icons"
       echo " 1) $(menu_item "numix-icon-theme-git") $AUR"
       echo " 2) $(menu_item "arc-icon-theme-git") $AUR"
       echo ""
@@ -875,7 +873,7 @@ install_desktop_environment(){
   install_display_manager() { #{{{
     while true
     do
-      print_title "DISPLAY MANAGER - https://wiki.archlinux.org/index.php/Display_Manager"
+      print_title "Display manager - https://wiki.archlinux.org/index.php/Display_Manager"
       print_info "A display manager, or login manager, is a graphical interface screen that is displayed at the end of the boot process in place of the default shell."
       echo " 1) $(menu_item "entrance-git" "Entrance") $AUR"
       echo " 2) $(menu_item "gdm" "GDM")"
@@ -931,7 +929,7 @@ install_desktop_environment(){
   install_themes() { #{{{
     while true
     do
-      print_title "$1 THEMES"
+      print_title "$1 Themes"
       echo " 1) $(menu_item "numix-circle-icon-theme-git" "Icons Themes") $AUR"
       echo " 2) $(menu_item "gtk-theme-arc-git " "GTK Themes") $AUR"
       echo ""
@@ -963,7 +961,7 @@ install_desktop_environment(){
   install_misc_apps() { #{{{
     while true
     do
-      print_title "$1 ESSENTIAL APPS"
+      print_title "$1 Essential applications"
       echo " 1) $(menu_item "entrance-git gdm lightdm sddm" "Display Manager") $AUR"
       echo " 2) $(menu_item "dmenu")"
       echo " 3) $(menu_item "viewnior")"
@@ -1036,7 +1034,7 @@ install_desktop_environment(){
     done
   } #}}}
 
-  print_title "DESKTOP ENVIRONMENT|WINDOW MANAGER"
+  print_title "Desktop environment/Window manager"
   print_info "A DE provide a complete GUI for a system by bundling together a variety of X clients written using a common widget toolkit and set of libraries.\n\nA window manager is one component of a system's graphical user interface."
 
   echo -e "Select your DE or WM:\n"
@@ -1056,7 +1054,7 @@ install_desktop_environment(){
   case "$OPTION" in
     1)
       #CINNAMON {{{
-      print_title "CINNAMON - https://wiki.archlinux.org/index.php/Cinnamon"
+      print_title "Cinnamon - https://wiki.archlinux.org/index.php/Cinnamon"
       print_info "Cinnamon is a fork of GNOME Shell, initially developed by Linux Mint. It attempts to provide a more traditional user environment based on the desktop metaphor, like GNOME 2. Cinnamon uses Muffin, a fork of the GNOME 3 window manager Mutter, as its window manager."
       package_install "cinnamon nemo-fileroller nemo-preview"
       # config xinitrc
@@ -1069,8 +1067,8 @@ install_desktop_environment(){
       #}}}
     2)
       #DEEPIN {{{
-      print_title "DEEPIN - http://www.linuxdeepin.com"
-      print_info "The desktop interface and apps feature an intuitive and elegant design. Moving around, sharing and searching etc. has become simply a joyful experience."
+      print_title "Deepin - http://www.linuxdeepin.com"
+      print_info "The desktop interface and applications feature an intuitive and elegant design. Moving around, sharing and searching etc. has become simply a joyful experience."
       package_install "deepin deepin-extra lightdm-gtk-greeter"
       # config xinitrc
       config_xinitrc "startdde"
@@ -1082,7 +1080,7 @@ install_desktop_environment(){
       #}}}
     3)
       #ENLIGHTENMENT {{{
-      print_title "ENLIGHTENMENT - http://wiki.archlinux.org/index.php/Enlightenment"
+      print_title "Enlightenment - http://wiki.archlinux.org/index.php/Enlightenment"
       print_info "Enlightenment, also known simply as E, is a stacking window manager for the X Window System which can be used alone or in conjunction with a desktop environment such as GNOME or KDE. Enlightenment is often used as a substitute for a full desktop environment."
       package_install "enlightenment terminology"
       package_install "leafpad epdfview"
@@ -1096,7 +1094,7 @@ install_desktop_environment(){
       #}}}
     4)
       #GNOME {{{
-      print_title "GNOME - https://wiki.archlinux.org/index.php/GNOME"
+      print_title "Gnome - https://wiki.archlinux.org/index.php/GNOME"
       print_info "GNOME is a desktop environment and graphical user interface that runs on top of a computer operating system. It is composed entirely of free and open source software. It is an international project that includes creating software development frameworks, selecting application software for the desktop, and working on the programs that manage application launching, file handling, and window and task management."
       package_install "gnome gnome-extra gnome-software gnome-initial-setup"
       package_install "deja-dup gedit-plugins gpaste gnome-tweak-tool gnome-power-manager"
@@ -1194,7 +1192,7 @@ install_desktop_environment(){
       #}}}
     7)
       #MATE {{{
-      print_title "MATE - https://wiki.archlinux.org/index.php/Mate"
+      print_title "Mate - https://wiki.archlinux.org/index.php/Mate"
       print_info "The MATE Desktop Environment is a fork of GNOME 2 that aims to provide an attractive and intuitive desktop to Linux users using traditional metaphors."
       package_install "mate mate-extra"
       # config xinitrc
@@ -1218,7 +1216,7 @@ install_desktop_environment(){
       #}}}
     9)
       #BUDGIE {{{
-      print_title "BUDGIE - https://wiki.archlinux.org/index.php/Budgie_Desktop"
+      print_title "Budgie - https://wiki.archlinux.org/index.php/Budgie_Desktop"
       print_info "Budgie is the default desktop of Solus Operating System, written from scratch. Besides a more modern design, Budgie can emulate the look and feel of the GNOME 2 desktop."
       package_install "gnome gnome-extra gnome-software gnome-initial-setup telepathy"
       package_install "deja-dup gedit-plugins gpaste gnome-tweak-tool gnome-power-manager"
@@ -1237,7 +1235,7 @@ install_desktop_environment(){
       #}}}
     10)
       #AWESOME {{{
-      print_title "AWESOME - http://wiki.archlinux.org/index.php/Awesome"
+      print_title "Awesome - http://wiki.archlinux.org/index.php/Awesome"
       print_info "awesome is a highly configurable, next generation framework window manager for X. It is very fast, extensible and licensed under the GNU GPLv2 license."
       package_install "awesome"
       package_install "lxappearance"
@@ -1256,7 +1254,7 @@ install_desktop_environment(){
       #}}}
     11)
       #FLUXBOX {{{
-      print_title "FLUXBOX - http://wiki.archlinux.org/index.php/Fluxbox"
+      print_title "Fluxbox - http://wiki.archlinux.org/index.php/Fluxbox"
       print_info "Fluxbox is yet another window manager for X11. It is based on the (now abandoned) Blackbox 0.61.1 code, but with significant enhancements and continued development. Fluxbox is very light on resources and fast, yet provides interesting window management tools such as tabbing and grouping."
       package_install "fluxbox menumaker"
       package_install "lxappearance"
@@ -1283,7 +1281,7 @@ install_desktop_environment(){
       #}}}
     13)
       #OPENBOX {{{
-      print_title "OPENBOX - http://wiki.archlinux.org/index.php/Openbox"
+      print_title "Openbox - http://wiki.archlinux.org/index.php/Openbox"
       print_info "Openbox is a lightweight and highly configurable window manager with extensive standards support."
       package_install "openbox obconf obmenu menumaker"
       package_install "lxappearance"
@@ -1300,7 +1298,7 @@ install_desktop_environment(){
       #}}}
     14)
       #XMONAD {{{
-      print_title "XMONAD - http://wiki.archlinux.org/index.php/Xmonad"
+      print_title "Xmonad - http://wiki.archlinux.org/index.php/Xmonad"
       print_info "xmonad is a tiling window manager for X. Windows are arranged automatically to tile the screen without gaps or overlap, maximizing screen use. Window manager features are accessible from the keyboard: a mouse is optional."
       package_install "xmonad xmonad-contrib"
       # config xinitrc
@@ -1346,8 +1344,8 @@ install_desktop_environment(){
 #}}}
 #CONNMAN/NETWORKMANAGER/WICD {{{
 install_nm_wicd(){
-  print_title "NETWORK MANAGER"
-  echo " 1) Networkmanager"
+  print_title "Network manager"
+  echo " 1) NetworkManager"
   echo " 2) Wicd"
   echo " 3) ConnMan"
   echo ""
@@ -1356,7 +1354,7 @@ install_nm_wicd(){
   read_input $NETWORKMANAGER
   case "$OPTION" in
     1)
-      print_title "NETWORKMANAGER - https://wiki.archlinux.org/index.php/Networkmanager"
+      print_title "NetworkManager - https://wiki.archlinux.org/index.php/Networkmanager"
       print_info "NetworkManager is a program for providing detection and configuration for systems to automatically connect to network. NetworkManager's functionality can be useful for both wireless and wired networks."
       if [[ ${KDE} -eq 1 ]]; then
         package_install "networkmanager dnsmasq plasma-nm networkmanager-qt"
@@ -1389,7 +1387,7 @@ install_nm_wicd(){
       pause_function
       ;;
     3)
-      print_title "CONNMAN - https://wiki.archlinux.org/index.php/Connman"
+      print_title "Connman - https://wiki.archlinux.org/index.php/Connman"
       print_info "ConnMan is an alternative to NetworkManager and Wicd and was created by Intel and the Moblin project for use with embedded devices."
       package_install "connman"
       # ConnMan daemon
@@ -1401,7 +1399,7 @@ install_nm_wicd(){
 #}}}
 #USB 3G MODEM {{{
 install_usb_modem(){
-  print_title "USB 3G MODEM - https://wiki.archlinux.org/index.php/USB_3G_Modem"
+  print_title "USB 3G Modem - https://wiki.archlinux.org/index.php/USB_3G_Modem"
   print_info "A number of mobile telephone networks around the world offer mobile internet connections over UMTS (or EDGE or GSM) using a portable USB modem device."
   read_input_text "Install usb 3G modem support" $USBMODEM
   if [[ $OPTION == y ]]; then
@@ -1421,7 +1419,7 @@ install_usb_modem(){
 install_accessories_apps(){
   while true
   do
-    print_title "ACCESSORIES APPS"
+    print_title "Accessories applications"
     echo " 1) $(menu_item "catfish")"
     echo " 2) $(menu_item "conky-lua") $AUR"
     echo " 3) $(menu_item "docky") $AUR"
@@ -1501,7 +1499,7 @@ install_accessories_apps(){
 install_development_apps(){
   while true
   do
-    print_title "DEVELOPMENT APPS"
+    print_title "Development applications"
     echo " 1) $(menu_item "atom" "Atom")"
     echo " 2) $(menu_item "emacs")"
     echo " 3) $(menu_item "gvim")"
@@ -1593,7 +1591,7 @@ install_development_apps(){
 install_office_apps(){
   while true
   do
-    print_title "OFFICE APPS"
+    print_title "Office applications"
     echo " 1) $(menu_item "goffice calligra-libs" "$([[ ${KDE} -eq 1 ]] && echo "Caligra" || echo "Abiword + Gnumeric";)")"
     echo " 2) $(menu_item "calibre")"
     echo " 3) $(menu_item "gcstar")"
@@ -1649,7 +1647,7 @@ install_office_apps(){
           fi
           ;;
         9)
-          print_title "LIBREOFFICE - https://wiki.archlinux.org/index.php/LibreOffice"
+          print_title "LibreOffice - https://wiki.archlinux.org/index.php/LibreOffice"
           package_install "libreoffice-fresh"
           [[ $LOCALE != en_US ]] && package_install "libreoffice-fresh-$LOCALE_LO"
           package_install "hunspell hunspell-$LOCALE_HS"
@@ -1678,7 +1676,7 @@ install_office_apps(){
 install_system_apps(){
   while true
   do
-    print_title "SYSTEM TOOLS APPS"
+    print_title "System applications"
     echo " 1) $(menu_item "clamav")"
     echo " 2) $(menu_item "cockpit") $AUR"
     echo " 3) $(menu_item "docker")"
@@ -1789,7 +1787,7 @@ install_system_apps(){
 install_graphics_apps(){
   while true
   do
-    print_title "GRAPHICS APPS"
+    print_title "Graphics applications"
     echo " 1) $(menu_item "blender")"
     echo " 2) $(menu_item "gimp")"
     echo " 3) $(menu_item "gthumb")"
@@ -1853,7 +1851,7 @@ install_graphics_apps(){
 install_internet_apps(){
   while true
   do
-    print_title "INTERNET APPS"
+    print_title "Internet applications"
     echo " 1) Browser"
     echo " 2) Download|Fileshare"
     echo " 3) Email|RSS"
@@ -1871,7 +1869,7 @@ install_internet_apps(){
           #BROWSER {{{
           while true
           do
-            print_title "BROWSER"
+            print_title "Browser"
             echo " 1) $(menu_item "google-chrome" "Chrome") $AUR"
             echo " 2) $(menu_item "chromium")"
             echo " 3) $(menu_item "firefox")"
@@ -1924,7 +1922,7 @@ install_internet_apps(){
           #DOWNLOAD|FILESHARE {{{
           while true
           do
-            print_title "DOWNLOAD|FILESHARE"
+            print_title "Download|Fileshare"
             echo " 1) $(menu_item "aerofs") $AUR"
             echo " 2) $(menu_item "rslsync" "Resilio Sync") $AUR"
             echo " 3) $(menu_item "deluge")"
@@ -2009,7 +2007,7 @@ install_internet_apps(){
           #EMAIL {{{
           while true
           do
-            print_title "EMAIL|RSS"
+            print_title "Email|RSS"
             echo " 1) $(menu_item "liferea")"
             echo " 2) $(menu_item "thunderbird")"
             echo ""
@@ -2043,7 +2041,7 @@ install_internet_apps(){
           #IM|IRC {{{
           while true
           do
-            print_title "IM - INSTANT MESSAGING"
+            print_title "IM - Instant Messaging"
             echo " 1) $(menu_item "hexchat konversation" "$([[ ${KDE} -eq 1 ]] && echo "Konversation" || echo "Hexchat";)")"
             echo " 2) $(menu_item "irssi")"
             echo " 3) $(menu_item "pidgin")"
@@ -2108,7 +2106,7 @@ install_internet_apps(){
           #MAPPING {{{
           while true
           do
-            print_title "MAPPING TOOLS"
+            print_title "Mapping tools"
             echo " 1) $(menu_item "google-earth") $AUR"
             echo " 2) $(menu_item "worldwind" "NASA World Wind") $AUR"
             echo ""
@@ -2141,7 +2139,7 @@ install_internet_apps(){
           #DESKTOP SHARE {{{
           while true
           do
-            print_title "DESKTOP SHARE"
+            print_title "Desktop share"
             echo " 1) $(menu_item "remmina")"
             echo " 2) $(menu_item "teamviewer") $AUR"
             echo ""
@@ -2186,7 +2184,7 @@ install_internet_apps(){
 install_audio_apps(){
   while true
   do
-    print_title "AUDIO APPS"
+    print_title "Audio applications"
     echo " 1) Players"
     echo " 2) Editors|Tools"
     echo " 3) Codecs"
@@ -2201,7 +2199,7 @@ install_audio_apps(){
           #PLAYERS {{{
           while true
           do
-            print_title "AUDIO PLAYERS"
+            print_title "Audio players"
             echo " 1) $(menu_item "amarok")"
             echo " 2) $(menu_item "audacious")"
             echo " 3) $(menu_item "banshee") $AUR"
@@ -2290,7 +2288,7 @@ install_audio_apps(){
           #EDITORS {{{
           while true
           do
-            print_title "AUDIO EDITORS|TOOLS"
+            print_title "Audio editors/tools"
             echo " 1) $(menu_item "audacity")"
             echo " 2) $(menu_item "easytag")"
             echo " 3) $(menu_item "ocenaudio-bin") $AUR"
@@ -2356,7 +2354,7 @@ install_audio_apps(){
 install_video_apps(){
   while true
   do
-    print_title "VIDEO APPS"
+    print_title "Video applications"
     echo " 1) Players"
     echo " 2) Editors|Tools"
     echo " 3) Codecs"
@@ -2371,7 +2369,7 @@ install_video_apps(){
           #PLAYERS {{{
           while true
           do
-            print_title "VIDEO PLAYERS"
+            print_title "Videp players"
             echo " 1) $(menu_item "gnome-mplayer")"
             echo " 2) $(menu_item "livestreamer")"
             echo " 3) $(menu_item "minitube")"
@@ -2434,7 +2432,7 @@ install_video_apps(){
           #EDITORS {{{
           while true
           do
-            print_title "VIDEO EDITORS|TOOLS"
+            print_title "Video editors|/tools"
             echo " 1) $(menu_item "arista") $AUR"
             echo " 2) $(menu_item "avidemux-gtk avidemux-qt" "Avidemux")"
             echo " 3) $(menu_item "filebot") $AUR"
@@ -2648,7 +2646,7 @@ install_web_server(){
     echo "You can access your projects at \"http://localhost/~username\""
     pause_function
   } #}}}
-  print_title "WEB SERVER - https://wiki.archlinux.org/index.php/LAMP|LAPP"
+  print_title "Web server - https://wiki.archlinux.org/index.php/LAMP|LAPP"
   print_info "*Adminer is installed by default in all options"
   echo " 1) LAMP - APACHE, MariaDB & PHP"
   echo " 2) LAPP - APACHE, POSTGRESQL & PHP"
@@ -2700,7 +2698,7 @@ install_web_server(){
 install_fonts(){
   while true
   do
-    print_title "FONTS - https://wiki.archlinux.org/index.php/Fonts"
+    print_title "Fonts - https://wiki.archlinux.org/index.php/Fonts"
     echo " 1) $(menu_item "ttf-dejavu")"
     echo " 2) $(menu_item "ttf-fira-code") $AUR"
     echo " 3) $(menu_item "ttf-google-fonts-git") $AUR"
@@ -2766,7 +2764,7 @@ install_fonts(){
 #}}}
 #CLEAN ORPHAN PACKAGES {{{
 clean_orphan_packages(){
-  print_title "CLEAN ORPHAN PACKAGES"
+  print_title "Clean orphan packages"
   pacman -Rsc --noconfirm $(pacman -Qqdt)
   #pacman -Sc --noconfirm
   pacman-optimize
@@ -2783,12 +2781,12 @@ reconfigure_system(){
   done
   localectl set-keymap ${KEYMAP}
 
-  print_title "HOSTNAME - https://wiki.archlinux.org/index.php/HOSTNAME"
+  print_title "hostname - https://wiki.archlinux.org/index.php/HOSTNAME"
   print_info "A host name is a unique name created to identify a machine on a network.Host names are restricted to alphanumeric characters.\nThe hyphen (-) can be used, but a host name cannot start or end with it. Length is restricted to 63 characters."
   read -p "Hostname [ex: archlinux]: " HN
   hostnamectl set-hostname $HN
 
-  print_title "TIMEZONE - https://wiki.archlinux.org/index.php/Timezone"
+  print_title "Timezone - https://wiki.archlinux.org/index.php/Timezone"
   print_info "In an operating system the time (clock) is determined by four parts: Time value, Time standard, Time Zone, and DST (Daylight Saving Time if applicable)."
   OPTION=n
   while [[ $OPTION != y ]]; do
@@ -2797,7 +2795,7 @@ reconfigure_system(){
   done
   timedatectl set-timezone ${ZONE}/${SUBZONE}
 
-  print_title "HARDWARE CLOCK TIME - https://wiki.archlinux.org/index.php/Internationalization"
+  print_title "Hardware clock - https://wiki.archlinux.org/index.php/Internationalization"
   print_info "This is set in /etc/adjtime. Set the hardware clock mode uniformly between your operating systems on the same machine. Otherwise, they will overwrite the time and cause clock shifts (which can cause time drift correction to be miscalibrated)."
   hwclock_list=('UTC' 'Localtime');
   PS3="$prompt1"
@@ -2820,7 +2818,7 @@ reconfigure_system(){
 install_extra(){
   while true
   do
-    print_title "EXTRA"
+    print_title "Extras"
     echo " 1) Global Menu $AUR"
     echo " 2) $(menu_item "profile-sync-daemon") $AUR"
     echo " b) BACK"
@@ -2899,14 +2897,14 @@ do
   print_warning "USERNAME: ${username}"
   echo " 1) $(mainmenu_item "${checklist[1]}" "Basic Setup")"
   echo " 2) $(mainmenu_item "${checklist[2]}" "Desktop Environment|Window Manager")"
-  echo " 3) $(mainmenu_item "${checklist[3]}" "Accessories Apps")"
-  echo " 4) $(mainmenu_item "${checklist[4]}" "Development Apps")"
-  echo " 5) $(mainmenu_item "${checklist[5]}" "Office Apps")"
-  echo " 6) $(mainmenu_item "${checklist[6]}" "System Apps")"
-  echo " 7) $(mainmenu_item "${checklist[7]}" "Graphics Apps")"
-  echo " 8) $(mainmenu_item "${checklist[8]}" "Internet Apps")"
-  echo " 9) $(mainmenu_item "${checklist[9]}" "Audio Apps")"
-  echo "10) $(mainmenu_item "${checklist[10]}" "Video Apps")"
+  echo " 3) $(mainmenu_item "${checklist[3]}" "Accessories applications")"
+  echo " 4) $(mainmenu_item "${checklist[4]}" "Development applications")"
+  echo " 5) $(mainmenu_item "${checklist[5]}" "Office applications")"
+  echo " 6) $(mainmenu_item "${checklist[6]}" "System applicationsps")"
+  echo " 7) $(mainmenu_item "${checklist[7]}" "Graphics applications")"
+  echo " 8) $(mainmenu_item "${checklist[8]}" "Internet applications")"
+  echo " 9) $(mainmenu_item "${checklist[9]}" "Audio applications")"
+  echo "10) $(mainmenu_item "${checklist[10]}" "Video applications")"
   echo "11) $(mainmenu_item "${checklist[11]}" "Games")"
   echo "12) $(mainmenu_item "${checklist[12]}" "Web server")"
   echo "13) $(mainmenu_item "${checklist[13]}" "Fonts")"
