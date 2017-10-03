@@ -184,7 +184,7 @@ select_user(){
         1)
           package_install "git"
           package_install "colordiff"
-          git clone https://github.com/helmuthdu/dotfiles
+          git clone https://bitbucket.org/INT3NSE07/dotfiles
           cp dotfiles/.bashrc dotfiles/.dircolors dotfiles/.dircolors_256 dotfiles/.nanorc dotfiles/.yaourtrc ~/
           cp dotfiles/.bashrc dotfiles/.dircolors dotfiles/.dircolors_256 dotfiles/.nanorc dotfiles/.yaourtrc /home/${username}/
           rm -fr dotfiles
