@@ -360,7 +360,7 @@
   # 8) ttf-ms-fonts
   # 9) wqy-microhei
   #10) noto-fonts-cjk
-  FONTS_OPTIONS="1-10"
+  FONTS_OPTIONS=""
 #}}}
 #EXTRA {{{
   # 1) Global Menu
