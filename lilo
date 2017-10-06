@@ -601,7 +601,7 @@ font_config(){
   print_info "Fontconfig is a library designed to provide a list of available fonts to applications, and also for configuration for how fonts get rendered."
   read_input_text "Install Fontconfig" $FONTCONFIG
   if [[ $OPTION == y ]]; then
-    pacman -S --asdeps --needed cairo fontconfig freetype2
+    pacman -S --asdeps --noconfirm --needed cairo fontconfig freetype2
     pause_function
   fi
 }
