@@ -208,7 +208,7 @@ select_user(){
     #}}}
     #EDITOR {{{
     print_title "Default editor"
-    editors_list=("emacs" "nano" "vi" "vim" "neovim" "zile");
+    editors_list=("emacs" "nano" "vi" "vim");
     PS3="$prompt1"
     echo -e "Select editor\n"
     select EDITOR in "${editors_list[@]}"; do
