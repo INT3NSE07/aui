@@ -897,8 +897,13 @@ install_desktop_environment(){
           3)
             if [[ ${KDE} -eq 1 ]]; then
               package_install "lightdm lightdm-kde-greeter"
+            elif [[ ${MATE} -eq 1 ]]; then
+              package_install "lightdm lightdm-gtk3-greeter"
             else
               package_install "lightdm lightdm-gtk-greeter"
+            fi
+            if [[ ${MATE} -eq 1 ]]; then
+              system_ctl enable accounts-daemon
             fi
             system_ctl enable lightdm
             ;;
@@ -1193,12 +1198,13 @@ install_desktop_environment(){
       #MATE {{{
       print_title "Mate - https://wiki.archlinux.org/index.php/Mate"
       print_info "The MATE Desktop Environment is a fork of GNOME 2 that aims to provide an attractive and intuitive desktop to Linux users using traditional metaphors."
-      package_install "mate mate-extra"
+      package_install "mate mate-extra mate-applet-dock mate-menu mate-tweak brisk-menu mate-media blueman network-manager-applet mate-power-manager system-config-printer mate-disk-utility accountsservice"
       # config xinitrc
       config_xinitrc "mate-session"
       pause_function
       install_display_manager
       install_themes "MATE"
+      MATE=1
       ;;
       #}}}
     8)

@@ -38,12 +38,12 @@
   CUPS="n"
   CUSTOMREPO="n"         # Add custom repositories
   FIRMWARE="n"           # Install custom firmwares
-  NFS="n"
+  NFS="y"
   READAHEAD="y"
   SAMBA="n"
   SSH="y"
-  TLP="n"                # Laptop Power Manager
-  ZRAM="n"
+  TLP="y"                # Laptop Power Manager
+  ZRAM="y"
   ZSH="y"
   OH_MY_ZSH="y"
   PROPRIETARY_DRIVER="n" # Proprietary (NVIDIA) driver
@@ -80,7 +80,7 @@
   #12) i3
   #13) OpenBox
   #14) Xmonad
-  DESKTOPENV=12
+  DESKTOPENV=7
   #KDE {{{
     # 1) Choqok
     # 2) Digikam
@@ -122,7 +122,7 @@
   #}}}
   #GTK THEMES {{{
     # 1) Arc
-    GTK_THEMES="1"
+    GTK_THEMES=""
   #}}}
 #}}}
 #NETWORK MANAGER {{{
