@@ -330,7 +330,7 @@ format_partitions(){
   fi
 
   select_filesystem(){
-    filesystems_list=( "btrfs" "ext2" "ext3" "ext4" "f2fs" "jfs" "nilfs2" "ntfs" "vfat" "xfs");
+    filesystems_list=( "btrfs" "ext2" "ext3" "ext4(Recommended)" "f2fs" "jfs" "nilfs2" "ntfs" "vfat" "xfs");
     PS3="$prompt1"
     echo -e "Select filesystem:\n"
     select filesystem in "${filesystems_list[@]}"; do
