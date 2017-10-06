@@ -335,6 +335,10 @@ format_partitions(){
     echo -e "Select filesystem:\n"
     select filesystem in "${filesystems_list[@]}"; do
       if contains_element "${filesystem}" "${filesystems_list[@]}"; then
+        if [ $filesystem == "ext4(Recommended)" ]
+        then
+            filesystem="ext4"
+        fi
         break
       else
         invalid_option
