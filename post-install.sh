@@ -5,4 +5,5 @@ if [ $EUID != 0 ]; then
     exit $?
 fi
 
+cd arch-scripts/
 sudo ./lilo
