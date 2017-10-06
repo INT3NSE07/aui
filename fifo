@@ -503,6 +503,11 @@ format_partitions(){
 #}}}
 #INSTALL BASE SYSTEM {{{
 install_base_system(){
+  # Copy over packages
+  mkdir -p /mnt/var/cache/pacman/pkg
+  cp ~/packages/* /mnt/var/cache/pacman/pkg
+  rm -rf /var/cache/pacman/pkg
+  ln -s /mnt/var/cache/pacman/pkg /var/cache/pacman/pkg
   print_title "Install base system"
   print_info "Using the pacstrap script we install the base system. The base-devel package group will be installed also."
   if [ -f "${MOUNTPOINT}${EFI_MOUNTPOINT}/vmlinuz-linux" ]; then
