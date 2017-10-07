@@ -676,11 +676,9 @@ install_bootloader(){
   select bootloader in "${bootloaders_list[@]}"; do
     case "$REPLY" in
       1)
-        pacstrap ${MOUNTPOINT} grub os-prober
         break
         ;;
       2)
-        pacstrap ${MOUNTPOINT} syslinux gptfdisk
         break
         ;;
       3)
@@ -689,7 +687,6 @@ install_bootloader(){
       4)
         if [[ $UEFI -eq 1 ]]
         then
-          pacstrap ${MOUNTPOINT} refind-efi os-prober
           break
         else
           invalid_option
@@ -703,7 +700,6 @@ install_bootloader(){
         ;;
     esac
   done
-  [[ $UEFI -eq 1 ]] && pacstrap ${MOUNTPOINT} efibootmgr dosfstools
 }
 #}}}
 #CONFIGURE BOOTLOADER {{{
