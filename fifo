@@ -707,7 +707,6 @@ install_bootloader(){
         ;;
     esac
   done
-  [[ $UEFI -eq 1 ]]
 }
 #}}}
 #CONFIGURE BOOTLOADER {{{
@@ -868,7 +867,7 @@ root_password(){
 finish(){
   print_title "Installation completed"
   #COPY AUI TO ROOT FOLDER IN THE NEW SYSTEM
-  cp -R arch-scripts dotfiles ${MOUNTPOINT}/root
+  cp -R `pwd` ${MOUNTPOINT}/root
   cp ${MOUNTPOINT}/root/arch-scripts/post-install.sh ${MOUNTPOINT}/root
   read_input_text "Reboot system"
   if [[ $OPTION == y ]]; then
