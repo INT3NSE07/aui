@@ -502,19 +502,19 @@ format_partitions(){
 #}}}
 #INSTALL BASE SYSTEM {{{
 install_base_system(){
-  mkdir -p /mnt/var/lib/pacman/sync/
-  cp ~/pacmandb/*.db /mnt/var/lib/pacman/sync/
-  # Copy over packages
-  mkdir -p /mnt/var/cache/pacman/pkg
-  cp -r ~/packages/* /mnt/var/cache/pacman/pkg
-  rm -rf /var/cache/pacman/pkg
-  ln -s /mnt/var/cache/pacman/pkg /var/cache/pacman/pkg
   if [ $NETC -ne 0 ]; then
     print_title "Install base system"
     print_info "Using the pacstrap script we install the base system. The base-devel package group will be installed also."h
 
 	rsync -axh --info=progress2 / /mnt
 	cp -vaT /run/archiso/bootmnt/arch/boot/x86_64/vmlinuz /mnt/boot/vmlinuz-linux
+	mkdir -p /mnt/var/lib/pacman/sync/
+	cp ~/pacmandb/*.db /mnt/var/lib/pacman/sync/
+	# Copy over packages
+	mkdir -p /mnt/var/cache/pacman/pkg
+	cp -r ~/packages/* /mnt/var/cache/pacman/pkg
+	rm -rf /var/cache/pacman/pkg
+	ln -s /mnt/var/cache/pacman/pkg /var/cache/pacman/pkg
 	# Restore journald config
 	arch_chroot sed -i 's/Storage=volatile/#Storage=auto/' /etc/systemd/journald.conf
 	# Remove autologin scripts
