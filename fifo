@@ -881,8 +881,10 @@ do
   echo " 2) $(mainmenu_item "${checklist[2]}"  "Select Editor"            "${EDITOR}" )"
   if [ $NETC -ne 0 ]; then
     checklist[3]=1
+    echo " 3) $(mainmenu_item "${checklist[3]}"  "Configure Mirrorlist" )"
+  else
+    echo " 3) $(mainmenu_item "${checklist[3]}"  "Configure Mirrorlist"     "${country_name} (${country_code})" )"
   fi
-  echo " 3) $(mainmenu_item "${checklist[3]}"  "Configure Mirrorlist"     "${country_name} (${country_code})" )"
   echo " 4) $(mainmenu_item "${checklist[4]}"  "Partition Scheme"         "${partition_layout}: ${partition}(${filesystem}) swap(${swap_type})" )"
   echo " 5) $(mainmenu_item "${checklist[5]}"  "Install Base System")"
   echo " 6) $(mainmenu_item "${checklist[6]}"  "Configure Fstab"          "${fstab}" )"
