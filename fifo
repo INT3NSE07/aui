@@ -30,7 +30,7 @@ select_keymap(){
   print_title "KEYMAP - https://wiki.archlinux.org/index.php/KEYMAP"
   keymap_list=("ANSI-dvorak" "atari-se" "atari-uk-falcon" "atari-us" "dvorak" "dvorak-ca-fr" "dvorak-es" "dvorak-fr" "dvorak-l" "dvorak-la" "dvorak-programmer" "dvorak-r" "dvorak-ru" "dvorak-sv-a1" "dvorak-sv-a5" "dvorak-uk" "emacs" "emacs2" "sg" "sg-latin1" "sg-latin1-lk450" "sk-prog-qwerty" "sk-prog-qwertz" "sk-qwerty" "sk-qwertz" "uk" "unicode" "us" "windowkeys");
   PS3="$prompt1"
-  print_info "The KEYMAP variable is specified in the /etc/rc.conf file. It defines what keymap the keyboard is in the virtual consoles. Keytable files are provided by the kbd package."
+  print_info "The KEYMAP variable is specified in the /etc/rc.conf file. It defines what keymap the keyboard is in the virtual consoles. Keytable files are provided by the kbd package"
   echo "keymap list in /usr/share/kbd/keymaps"
     select KEYMAP in "${keymap_list[@]}"; do
     if contains_element "$KEYMAP" "${keymap_list[@]}"; then
@@ -75,7 +75,7 @@ configure_mirrorlist(){
     done
   }
   print_title "Mirrorlist - https://wiki.archlinux.org/index.php/Mirrors"
-  print_info "This option is a guide to selecting and configuring your mirrors, and a listing of current available mirrors."
+  print_info "This option is a guide to selecting and configuring mirrors"
   OPTION=n
   while [[ $OPTION != y ]]; do
     country_list
@@ -180,7 +180,7 @@ create_partition_scheme(){
   LUKS=0
   LVM=0
   print_title "https://wiki.archlinux.org/index.php/Partitioning"
-  print_info "Partitioning a hard drive allows one to logically divide the available space into sections that can be accessed independently of one another."
+  print_info "Partitioning a hard drive allows one to logically divide the available space into sections that can be accessed independently of one another"
   print_warning "Maintain Current does not work with LUKS"
   partition_layouts=("Default" "LVM" "LVM+LUKS" "Maintain Current")
   PS3="$prompt1"
@@ -239,7 +239,7 @@ create_partition(){
 #SETUP LUKS {{{
 setup_luks(){
   print_title "LUKS - https://wiki.archlinux.org/index.php/LUKS"
-  print_info "The Linux Unified Key Setup or LUKS is a disk-encryption specification created by Clemens Fruhwirth and originally intended for Linux."
+  print_info "The Linux Unified Key Setup or LUKS is a disk-encryption specification which allows encryption of partitions"
   print_danger "\tDo not use this for boot partitions"
   block_list=(`lsblk | grep 'part' | awk '{print "/dev/" substr($1,3)}'`)
   PS3="$prompt1"
@@ -262,7 +262,7 @@ setup_luks(){
 #SETUP LVM {{{
 setup_lvm(){
   print_title "LVM - https://wiki.archlinux.org/index.php/LVM"
-  print_info "LVM is a logical volume manager for the Linux kernel; it manages disk drives and similar mass-storage devices. "
+  print_info "LVM is a logical volume manager for the Linux kernel which manages disk drives and similar mass-storage devices"
   print_warning "Last partition will take 100% of free space left"
   if [[ $LUKS -eq 1 ]]; then
     pvcreate /dev/mapper/crypt
@@ -502,10 +502,9 @@ format_partitions(){
 #}}}
 #INSTALL BASE SYSTEM {{{
 install_base_system(){
+  print_title "Install base system"
+  print_info "Using the pacstrap script the base and base-devel packages are installed"
   if [ $NETC -ne 0 ]; then
-    print_title "Install base system"
-    print_info "Using the pacstrap script we install the base system. The base-devel package group will be installed also."h
-
 	rsync -axh --info=progress2 / /mnt
 	cp -vaT /run/archiso/bootmnt/arch/boot/x86_64/vmlinuz /mnt/boot/vmlinuz-linux
 	mkdir -p /mnt/var/lib/pacman/sync/
@@ -526,8 +525,6 @@ install_base_system(){
 	arch_chroot "pacman-key --init"
 	arch_chroot "pacman-key --populate archlinux"
   else
-    print_title "Install base system"
-    print_info "Using the pacstrap script we install the base system. The base-devel package group will be installed also."
     if [ -f "${MOUNTPOINT}${EFI_MOUNTPOINT}/vmlinuz-linux" ]; then
       rm ${MOUNTPOINT}${EFI_MOUNTPOINT}/vmlinuz-linux
     fi
@@ -560,7 +557,7 @@ configure_keymap(){
 #CONFIGURE FSTAB {{{
 configure_fstab(){
   print_title "fstab - https://wiki.archlinux.org/index.php/Fstab"
-  print_info "The /etc/fstab file contains static filesystem information. It defines how storage devices and partitions are to be mounted and integrated into the overall system. It is read by the mount command to determine which options to use when mounting a specific partition or partition."
+  print_info "The /etc/fstab file contains static filesystem information. It defines how storage devices and partitions are to be mounted and integrated into the overall system. It is read by the mount command to determine which options to use when mounting a specific partition or partition"
   if [[ ! -f ${MOUNTPOINT}/etc/fstab.aui ]]; then
     cp ${MOUNTPOINT}/etc/fstab ${MOUNTPOINT}/etc/fstab.aui
   else
@@ -598,7 +595,7 @@ configure_fstab(){
 #CONFIGURE HOSTNAME {{{
 configure_hostname(){
   print_title "hostname - https://wiki.archlinux.org/index.php/HOSTNAME"
-  print_info "A host name is a unique name created to identify a machine on a network.Host names are restricted to alphanumeric characters.\nThe hyphen (-) can be used, but a host name cannot start or end with it. Length is restricted to 63 characters."
+  print_info "A host name is a unique name created to identify a machine on a network.Host names are restricted to alphanumeric characters.\nThe hyphen (-) can be used, but a host name cannot start or end with it. Length is restricted to 63 characters"
   read -p "Hostname [ex: archlinux]: " host_name
   echo "$host_name" > ${MOUNTPOINT}/etc/hostname
   if [[ ! -f ${MOUNTPOINT}/etc/hosts.aui ]]; then
@@ -613,7 +610,7 @@ configure_hostname(){
 #CONFIGURE TIMEZONE {{{
 configure_timezone(){
   print_title "Timezone - https://wiki.archlinux.org/index.php/Timezone"
-  print_info "In an operating system the time (clock) is determined by four parts: Time value, Time standard, Time Zone, and DST (Daylight Saving Time if applicable)."
+  print_info "In an operating system the time (clock) is determined by four parts: Time value, Time standard, Time Zone, and DST (Daylight Saving Time if applicable)"
   OPTION=n
   while [[ $OPTION != y ]]; do
     settimezone
@@ -629,7 +626,7 @@ configure_timezone(){
 #CONFIGURE HARDWARECLOCK {{{
 configure_hardwareclock(){
   print_title "Hardware clock - https://wiki.archlinux.org/index.php/Internationalization"
-  print_info "This is set in /etc/adjtime. Set the hardware clock mode uniformly between your operating systems on the same machine. Otherwise, they will overwrite the time and cause clock shifts (which can cause time drift correction to be miscalibrated)."
+  print_info "This is set in /etc/adjtime. Set the hardware clock mode uniformly between your operating systems on the same machine. Otherwise, they will overwrite the time and cause clock shifts (which can cause time drift correction to be miscalibrated)"
   hwclock_list=('UTC' 'Localtime');
   PS3="$prompt1"
   select OPT in "${hwclock_list[@]}"; do
@@ -648,7 +645,7 @@ configure_hardwareclock(){
 #CONFIGURE LOCALE {{{
 configure_locale(){
   print_title "locale - https://wiki.archlinux.org/index.php/Locale"
-  print_info "Locales are used in Linux to define which language the user uses. As the locales define the character sets being used as well, setting up the correct locale is especially important if the language contains non-ASCII characters."
+  print_info "Locales are used in Linux to define which language the user uses. As the locales define the character sets being used as well, setting up the correct locale is especially important if the language contains non-ASCII characters"
   OPTION=n
   while [[ $OPTION != y ]]; do
     setlocale
@@ -662,7 +659,7 @@ configure_locale(){
 #CONFIGURE MKINITCPIO {{{
 configure_mkinitcpio(){
   print_title "mkinitcpio - https://wiki.archlinux.org/index.php/Mkinitcpio"
-  print_info "mkinitcpio is a Bash script used to create an initial ramdisk environment."
+  print_info "mkinitcpio is a bash script used to create an initial ramdisk environment."
   [[ $LUKS -eq 1 ]] && sed -i '/^HOOK/s/block/block keymap encrypt/' ${MOUNTPOINT}/etc/mkinitcpio.conf
   [[ $LVM -eq 1 ]] && sed -i '/^HOOK/s/filesystems/lvm2 filesystems/' ${MOUNTPOINT}/etc/mkinitcpio.conf
   arch_chroot "mkinitcpio -p linux"
@@ -671,7 +668,7 @@ configure_mkinitcpio(){
 #INSTALL BOOTLOADER {{{
 install_bootloader(){
   print_title "Bootloader - https://wiki.archlinux.org/index.php/Bootloader"
-  print_info "The boot loader is responsible for loading the kernel and initial RAM disk before initiating the boot process."
+  print_info "The boot loader is responsible for loading the kernel and initial RAM disk before initiating the boot process"
   print_warning "\tROOT Partition: ${ROOT_MOUNTPOINT}"
   if [[ $UEFI -eq 1 ]]; then
     print_warning "\tUEFI Mode Detected"
@@ -716,7 +713,7 @@ configure_bootloader(){
   case $bootloader in
     Grub2)
       print_title "grub2 - https://wiki.archlinux.org/index.php/GRUB2"
-      print_info "grub2 is the next generation of the GRand Unified Bootloader (GRUB).\nIn brief, the bootloader is the first software program that runs when a computer starts. It is responsible for loading and transferring control to the Linux kernel."
+      print_info "grub2 is the next generation of the GRand Unified Bootloader (GRUB).\nIn brief, the bootloader is the first software program that runs when a computer starts. It is responsible for loading and transferring control to the Linux kernel"
       grub_install_mode=("Automatic" "Manual")
       PS3="$prompt1"
       echo -e "Grub Install:\n"
@@ -746,7 +743,7 @@ configure_bootloader(){
       ;;
     Syslinux)
       print_title "syslinux - https://wiki.archlinux.org/index.php/Syslinux"
-      print_info "syslinux is a collection of boot loaders capable of booting from hard drives, CDs, and over the network via PXE. It supports the fat, ext2, ext3, ext4, and btrfs file systems."
+      print_info "syslinux is a collection of boot loaders capable of booting from hard drives, CDs, and over the network via PXE. It supports the fat, ext2, ext3, ext4, and btrfs file systems"
       syslinux_install_mode=("[MBR] Automatic" "[PARTITION] Automatic" "Manual")
       PS3="$prompt1"
       echo -e "Syslinux Install:\n"
@@ -761,7 +758,7 @@ configure_bootloader(){
             else
               sed -i "s/sda[0-9]/${ROOT_PART}/g" ${MOUNTPOINT}/boot/syslinux/syslinux.cfg
             fi
-            print_warning "The partition in question needs to be whatever you have as / (root), not /boot."
+            print_warning "The partition in question needs to be whatever you have as / (root), not /boot"
             pause_function
             $EDITOR ${MOUNTPOINT}/boot/syslinux/syslinux.cfg
             break
@@ -775,7 +772,7 @@ configure_bootloader(){
             else
               sed -i "s/sda[0-9]/${ROOT_PART}/g" ${MOUNTPOINT}/boot/syslinux/syslinux.cfg
             fi
-            print_warning "The partition in question needs to be whatever you have as / (root), not /boot."
+            print_warning "The partition in question needs to be whatever you have as / (root), not /boot"
             pause_function
             $EDITOR ${MOUNTPOINT}/boot/syslinux/syslinux.cfg
             break
@@ -795,8 +792,8 @@ configure_bootloader(){
       ;;
     Systemd)
       print_title "systemd-boot - https://wiki.archlinux.org/index.php/Systemd-boot"
-      print_info "systemd-boot (previously called gummiboot), is a simple UEFI boot manager which executes configured EFI images. The default entry is selected by a configured pattern (glob) or an on-screen menu. It is included with systemd since systemd 220-2."
-      print_warning "\tSystemd-boot heavily suggests that /boot is mounted to the EFI partition, not /boot/efi, in order to simplify updating and configuration."
+      print_info "systemd-boot (previously called gummiboot), is a simple UEFI boot manager which executes configured EFI images. The default entry is selected by a configured pattern (glob) or an on-screen menu. It is included with systemd since systemd 220-2"
+      print_warning "\tSystemd-boot heavily suggests that /boot is mounted to the EFI partition, not /boot/efi, in order to simplify updating and configuration"
       gummiboot_install_mode=("Automatic" "Manual")
       PS3="$prompt1"
       echo -e "Gummiboot install:\n"
@@ -831,8 +828,8 @@ configure_bootloader(){
       ;;
     rEFInd)
       print_title "rEFInd - https://wiki.archlinux.org/index.php/REFInd"
-      print_info "rEFInd is a UEFI boot manager capable of launching EFISTUB kernels. It is a fork of the no-longer-maintained rEFIt and fixes many issues with respect to non-Mac UEFI booting. It is designed to be platform-neutral and to simplify booting multiple OSes."
-      print_warning "When refind-install (used in Automatic mode) is run in chroot (e.g. in live system when installing Arch Linux) /boot/refind-linux.conf is populated with kernel options from the live system not the one on which it is installed. You need to adjust kernel options in /boot/refind-linux.conf manually."
+      print_info "rEFInd is a UEFI boot manager capable of launching EFISTUB kernels. It is a fork of the no-longer-maintained rEFIt and fixes many issues with respect to non-Mac UEFI booting. It is designed to be platform-neutral and to simplify booting multiple Operating systems"
+      print_warning "When refind-install (used in Automatic mode) is run in chroot (e.g. in live system when installing Arch Linux) /boot/refind-linux.conf is populated with kernel options from the live system not the one on which it is installed. You need to adjust kernel options in /boot/refind-linux.conf manually"
       refind_install_mode=("Automatic" "Manual")
       PS3="$prompt1"
       echo -e "rEFInd install:\n"
@@ -886,7 +883,7 @@ finish(){
 #}}}
 
 print_title "https://wiki.archlinux.org/index.php/Arch_Install_Scripts"
-print_info "The Arch Install Scripts are a set of Bash scripts that simplify Arch installation."
+print_info "The Arch Install Scripts are a set of Bash scripts that simplify Arch installation"
 pause_function
 check_boot_system
 check_trim
