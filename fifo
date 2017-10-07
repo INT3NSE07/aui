@@ -507,7 +507,7 @@ install_base_system(){
   cp ~/pacmandb/*.db /mnt/var/lib/pacman/sync/
   # Copy over packages
   mkdir -p /mnt/var/cache/pacman/pkg
-  cp ~/packages/* /mnt/var/cache/pacman/pkg
+  cp -r ~/packages/* /mnt/var/cache/pacman/pkg
   rm -rf /var/cache/pacman/pkg
   ln -s /mnt/var/cache/pacman/pkg /var/cache/pacman/pkg
   if [ $NETC -ne 0 ]; then
