@@ -653,4 +653,9 @@
       fi
     done
   } #}}}
+  checkconnection() { #{{{
+    unset NETC
+    ping -c1 www.google.com &> /dev/null
+    NETC=$?
+  } #}}}
 #}}}
