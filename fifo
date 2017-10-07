@@ -869,6 +869,11 @@ finish(){
   #COPY AUI TO ROOT FOLDER IN THE NEW SYSTEM
   cp -R `pwd` ${MOUNTPOINT}/root
   cp ${MOUNTPOINT}/root/arch-scripts/post-install.sh ${MOUNTPOINT}/root
+  # Remove unecessary stuff
+  rm -rf ${MOUNTPOINT}/root/install.txt
+  rm -rf ${MOUNTPOINT}/root/install.sh
+  rm -rf ${MOUNTPOINT}/root/packages
+  rm -rf ${MOUNTPOINT}/root/pacmandb
   read_input_text "Reboot system"
   if [[ $OPTION == y ]]; then
     umount_partitions
