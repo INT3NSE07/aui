@@ -516,13 +516,15 @@ install_base_system(){
 	rm -rf /var/cache/pacman/pkg
 	ln -s /mnt/var/cache/pacman/pkg /var/cache/pacman/pkg
 	# Restore journald config
-	arch_chroot sed -i 's/Storage=volatile/#Storage=auto/' /etc/systemd/journald.conf
+	arch_chroot "sed -i 's/Storage=volatile/#Storage=auto/' /etc/systemd/journald.conf"
 	# Remove autologin scripts
-	arch_chroot rm /etc/systemd/system/getty@tty1.service.d/autologin.conf
-	arch_chroot rm /root/{.automated_script.sh,.zlogin}
+	arch_chroot "rm /etc/systemd/system/getty@tty1.service.d/autologin.conf"
+	arch_chroot "rm /root/{.automated_script.sh,.zlogin}"
+	arch_chroot "rm /etc/mkinitcpio-archiso.conf"
+	arch_chroot "rm -r /etc/initcpio"
 	# Import archlinux keys
-	arch_chroot pacman-key --init
-	arch_chroot pacman-key --populate archlinux
+	arch_chroot "pacman-key --init"
+	arch_chroot "pacman-key --populate archlinux"
   else
     print_title "Install base system"
     print_info "Using the pacstrap script we install the base system. The base-devel package group will be installed also."
