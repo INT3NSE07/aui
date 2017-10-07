@@ -528,7 +528,7 @@ install_base_system(){
     if [ -f "${MOUNTPOINT}${EFI_MOUNTPOINT}/vmlinuz-linux" ]; then
       rm ${MOUNTPOINT}${EFI_MOUNTPOINT}/vmlinuz-linux
     fi
-    pacstrap ${MOUNTPOINT} base base-devel parted btrfs-progs f2fs-tools ntp net-tools
+    pacstrap ${MOUNTPOINT} base base-devel
     [[ $? -ne 0 ]] && error_msg "Installing base system to ${MOUNTPOINT} failed. Check error messages above."
     local PTABLE=`parted -l | grep "gpt"`
     [[ -n $PTABLE ]] && pacstrap ${MOUNTPOINT} gptfdisk
