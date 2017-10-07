@@ -503,32 +503,40 @@ format_partitions(){
 #}}}
 #INSTALL BASE SYSTEM {{{
 install_base_system(){
+  cp pacmandb/*.db /var/lib/pacman/sync/
   # Copy over packages
   mkdir -p /mnt/var/cache/pacman/pkg
   cp ~/packages/* /mnt/var/cache/pacman/pkg
   rm -rf /var/cache/pacman/pkg
   ln -s /mnt/var/cache/pacman/pkg /var/cache/pacman/pkg
-  print_title "Install base system"
-  print_info "Using the pacstrap script we install the base system. The base-devel package group will be installed also."
-  if [ -f "${MOUNTPOINT}${EFI_MOUNTPOINT}/vmlinuz-linux" ]; then
-    rm ${MOUNTPOINT}${EFI_MOUNTPOINT}/vmlinuz-linux
-  fi
-  pacstrap ${MOUNTPOINT} base base-devel parted btrfs-progs f2fs-tools ntp net-tools
-  [[ $? -ne 0 ]] && error_msg "Installing base system to ${MOUNTPOINT} failed. Check error messages above."
-  local PTABLE=`parted -l | grep "gpt"`
-  [[ -n $PTABLE ]] && pacstrap ${MOUNTPOINT} gptfdisk
-  WIRELESS_DEV=`ip link | grep wl | awk '{print $2}'| sed 's/://' | sed '1!d'`
-  if [[ -n $WIRELESS_DEV ]]; then
-    pacstrap ${MOUNTPOINT} iw wireless_tools wpa_actiond wpa_supplicant dialog
+  if [ $NETC -ne 0 ]; then
+    print_title "Install base system"
+    print_info "Using the pacstrap script we install the base system. The base-devel package group will be installed also."h
+
+	rsync -axh / /mnt
   else
-    WIRED_DEV=`ip link | grep "ens\|eno\|enp" | awk '{print $2}'| sed 's/://' | sed '1!d'`
-    if [[ -n $WIRED_DEV ]]; then
-      arch_chroot "systemctl enable dhcpcd@${WIRED_DEV}.service"
+    print_title "Install base system"
+    print_info "Using the pacstrap script we install the base system. The base-devel package group will be installed also."
+    if [ -f "${MOUNTPOINT}${EFI_MOUNTPOINT}/vmlinuz-linux" ]; then
+      rm ${MOUNTPOINT}${EFI_MOUNTPOINT}/vmlinuz-linux
     fi
-  fi
-  if is_package_installed "espeakup"; then
-    pacstrap ${MOUNTPOINT} alsa-utils espeakup brltty
-    arch_chroot "systemctl enable espeakup.service"
+    pacstrap ${MOUNTPOINT} base base-devel parted btrfs-progs f2fs-tools ntp net-tools
+    [[ $? -ne 0 ]] && error_msg "Installing base system to ${MOUNTPOINT} failed. Check error messages above."
+    local PTABLE=`parted -l | grep "gpt"`
+    [[ -n $PTABLE ]] && pacstrap ${MOUNTPOINT} gptfdisk
+    WIRELESS_DEV=`ip link | grep wl | awk '{print $2}'| sed 's/://' | sed '1!d'`
+    if [[ -n $WIRELESS_DEV ]]; then
+      pacstrap ${MOUNTPOINT} iw wireless_tools wpa_actiond wpa_supplicant dialog
+    else
+      WIRED_DEV=`ip link | grep "ens\|eno\|enp" | awk '{print $2}'| sed 's/://' | sed '1!d'`
+      if [[ -n $WIRED_DEV ]]; then
+        arch_chroot "systemctl enable dhcpcd@${WIRED_DEV}.service"
+      fi
+    fi
+    if is_package_installed "espeakup"; then
+      pacstrap ${MOUNTPOINT} alsa-utils espeakup brltty
+      arch_chroot "systemctl enable espeakup.service"
+    fi
   fi
 }
 #}}}
@@ -911,8 +919,8 @@ do
         ;;
       3)
         if [ $NETC -eq 0 ]; then
-            configure_mirrorlist
-            checklist[3]=1
+          configure_mirrorlist
+          checklist[3]=1
         fi
         ;;
       4)
