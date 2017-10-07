@@ -503,7 +503,8 @@ format_partitions(){
 #}}}
 #INSTALL BASE SYSTEM {{{
 install_base_system(){
-  cp pacmandb/*.db /var/lib/pacman/sync/
+  mkdir -p /mnt/var/lib/pacman/sync/
+  cp ~/pacmandb/*.db /mnt/var/lib/pacman/sync/
   # Copy over packages
   mkdir -p /mnt/var/cache/pacman/pkg
   cp ~/packages/* /mnt/var/cache/pacman/pkg
@@ -514,6 +515,7 @@ install_base_system(){
     print_info "Using the pacstrap script we install the base system. The base-devel package group will be installed also."h
 
 	rsync -axh --info=progress2 / /mnt
+	cp -vaT /run/archiso/bootmnt/arch/boot/x86_64/vmlinuz /mnt/boot/vmlinuz-linux
   else
     print_title "Install base system"
     print_info "Using the pacstrap script we install the base system. The base-devel package group will be installed also."
