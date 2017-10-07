@@ -869,7 +869,6 @@ print_title "https://wiki.archlinux.org/index.php/Arch_Install_Scripts"
 print_info "The Arch Install Scripts are a set of Bash scripts that simplify Arch installation."
 pause_function
 check_boot_system
-check_connection
 check_trim
 if [ $NETC -eq 0 ]; then
     pacman -Sy
