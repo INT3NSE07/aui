@@ -513,7 +513,7 @@ install_base_system(){
     print_title "Install base system"
     print_info "Using the pacstrap script we install the base system. The base-devel package group will be installed also."h
 
-	rsync -axh / /mnt
+	rsync -axh --info=progress2 / /mnt
   else
     print_title "Install base system"
     print_info "Using the pacstrap script we install the base system. The base-devel package group will be installed also."
