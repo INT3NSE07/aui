@@ -515,7 +515,11 @@ install_base_system(){
 
 	rsync -axh --info=progress2 / /mnt
 	cp -vaT /run/archiso/bootmnt/arch/boot/x86_64/vmlinuz /mnt/boot/vmlinuz-linux
-    sed -i 's/Storage=volatile/#Storage=auto/' /etc/systemd/journald.conf
+	# Restore journald config
+	sed -i 's/Storage=volatile/#Storage=auto/' /etc/systemd/journald.conf
+	# Remove autologin scripts
+	rm /etc/systemd/system/getty@tty1.service.d/autologin.conf
+	rm /root/{.automated_script.sh,.zlogin}
   else
     print_title "Install base system"
     print_info "Using the pacstrap script we install the base system. The base-devel package group will be installed also."
