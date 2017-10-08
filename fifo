@@ -887,7 +887,7 @@ print_info "The Arch Install Scripts are a set of Bash scripts that simplify Arc
 pause_function
 check_boot_system
 check_trim
-checkconnection
+only_check_connection
 if [ $NETC -eq 0 ]; then
     pacman -Sy
 fi

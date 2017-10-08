@@ -653,7 +653,7 @@
       fi
     done
   } #}}}
-  checkconnection() { #{{{
+  only_check_connection() { #{{{
     unset NETC
     ping -c1 www.google.com &> /dev/null
     NETC=$?

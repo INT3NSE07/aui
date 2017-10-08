@@ -2847,7 +2847,7 @@ welcome
 check_root
 check_archlinux
 check_hostname
-check_connection
+only_check_connection
 check_pacman_blocked
 check_multilib
 pacman_key
