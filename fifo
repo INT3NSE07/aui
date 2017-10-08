@@ -514,9 +514,9 @@ install_base_system(){
   arch_chroot "rm /etc/systemd/system/getty@tty1.service.d/autologin.conf"
   arch_chroot "rm /root/{.automated_script.sh,.zlogin}"
   if [ $NETC -ne 0 ]; then
-	cp -vaT /run/archiso/bootmnt/arch/boot/x86_64/vmlinuz /mnt/boot/vmlinuz-linux
+	cp -aT /run/archiso/bootmnt/arch/boot/x86_64/vmlinuz /mnt/boot/vmlinuz-linux
 	mkdir -p /mnt/var/lib/pacman/sync/
-	cp ~/pacmandb/*.db /mnt/var/lib/pacman/sync/
+	rsync -arh --info=progress2 ~/pacmandb/*.db /mnt/var/lib/pacman/sync/
 	# Restore journald config
 	arch_chroot "sed -i 's/Storage=volatile/#Storage=auto/' /etc/systemd/journald.conf"
 	arch_chroot "rm /etc/mkinitcpio-archiso.conf"
