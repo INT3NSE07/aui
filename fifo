@@ -526,7 +526,7 @@ install_base_system(){
 	arch_chroot "pacman-key --init"
 	arch_chroot "pacman-key --populate archlinux"
 	arch_chroot "pkill haveged"
-	arch_chroot "package_remove \"haveged\""
+	arch_chroot "rm -rf /var/cache/pacman/pkg/haveged*"
   else
     if [ -f "${MOUNTPOINT}${EFI_MOUNTPOINT}/vmlinuz-linux" ]; then
       rm ${MOUNTPOINT}${EFI_MOUNTPOINT}/vmlinuz-linux
