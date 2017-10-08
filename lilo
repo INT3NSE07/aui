@@ -174,7 +174,11 @@ select_user(){
   configure_user_account(){
     #BASHRC {{{
     print_title "bashrc - https://wiki.archlinux.org/index.php/Bashrc"
-    bashrc_list=("Default" "Vanilla" "Get from github");
+    if [ $NETC -eq 0 ]; then
+      bashrc_list=("Default" "Vanilla" "Get from github");
+    else
+      bashrc_list=("Default" "Vanilla");
+    fi
     PS3="$prompt1"
     echo -e "Choose your .bashrc\n"
     select OPT in "${bashrc_list[@]}"; do
@@ -191,8 +195,8 @@ select_user(){
           ;;
         3)
           package_install "git"
-          read -p "Enter your github username [ex: helmuthdu]: " GITHUB_USER
-          read -p "Enter your github repository [ex: aui]: " GITHUB_REPO
+          read -p "Enter your github username: " GITHUB_USER
+          read -p "Enter your github repository: " GITHUB_REPO
           git clone https://github.com/$GITHUB_USER/$GITHUB_REPO
           cp -R $GITHUB_REPO/.* /home/${username}/
           rm -fr $GITHUB_REPO
