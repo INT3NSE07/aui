@@ -394,7 +394,8 @@ automatic_mode(){
   if [ $NETC -eq 0 ]; then
     read_input_text "Enable Automatic Mode"
   else
-	OPTIONS=y
+	OPTION=y
+	pause_function
   fi
   if [[ $OPTION == y ]]; then
 	$EDITOR ${AUI_DIR}/lilo.automode
