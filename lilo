@@ -34,7 +34,6 @@ welcome(){
   echo "Requirements:"
   echo "-> Archlinux installation"
   echo "-> Run script as root user"
-  echo "-> Working internet connection"
   print_line
   echo "Script can be cancelled at any time with CTRL+C"
   print_line
