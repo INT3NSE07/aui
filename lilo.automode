@@ -44,8 +44,8 @@
   SSH="y"
   TLP="y"                # Laptop Power Manager
   ZRAM="y"
-  ZSH="y"
-  OH_MY_ZSH="y"
+  ZSH="n"
+  OH_MY_ZSH="n"
   PROPRIETARY_DRIVER="n" # Proprietary (NVIDIA) driver
   FONTCONFIG="y"
   #}}}
