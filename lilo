@@ -97,7 +97,7 @@ language_selector(){
   #}}}
   #}}}
   print_title "locale - https://wiki.archlinux.org/index.php/Locale"
-  print_info "Locales are used in Linux to define which language the user uses. As the locales define the character sets being used as well, setting up the correct locale is especially important if the language contains non-ASCII characters."
+  print_info "Locales are used in Linux to define which language the user uses. As the locales define the character sets being used as well, setting up the correct locale is especially important if the language contains non-ASCII characters"
   read -p "Default system language: \"$LOCALE\" [Y/n]: " OPTION
   case "$OPTION" in
     "n")
@@ -327,8 +327,8 @@ configure_sudo(){
 #AUR HELPER {{{
 choose_aurhelper(){
   print_title "AUR helper - https://wiki.archlinux.org/index.php/AUR_Helpers"
-  print_info "AUR Helpers are written to make using the Arch User Repository more comfortable."
-  print_warning "\tNone of these tools are officially supported by Arch devs."
+  print_info "AUR Helpers are written to make using the Arch User Repository more comfortable"
+  print_warning "\tNone of these tools are officially supported by Arch devs"
   aurhelper=("yaourt" "apacman" "pacaur")
   PS3="$prompt1"
   echo -e "Choose your default AUR helper to install\n"
@@ -336,7 +336,7 @@ choose_aurhelper(){
     case "$REPLY" in
       1)
         print_title "yaourt - https://wiki.archlinux.org/index.php/Yaourt"
-        print_info "yaourt (Yet AnOther User Repository Tool) is a community-contributed wrapper for pacman which adds seamless access to the AUR, allowing and automating package compilation and installation from your choice of the thousands of PKGBUILDs in the AUR, in addition to the many thousands of available Arch Linux binary packages."
+        print_info "yaourt (Yet AnOther User Repository Tool) is a community-contributed wrapper for pacman which adds seamless access to the AUR, allowing and automating package compilation and installation from your choice of the thousands of PKGBUILDs in the AUR, in addition to the many thousands of available Arch Linux binary packages"
         if ! is_package_installed "yaourt" ; then
           package_install "base-devel yajl namcap"
           pacman -D --asdeps yajl namcap
@@ -390,8 +390,8 @@ choose_aurhelper(){
 #AUTOMODE {{{
 automatic_mode(){
   print_title "Automode"
-  print_info "Create a custom install with all options pre-selected.\nUse this option with care."
-  print_danger "\tUse this mode only if you already know all the option.\n\tYou won't be able to select anything later."
+  print_info "Create a custom install with all options pre-selected.\nUse this option with care"
+  print_danger "\tUse this mode only if you already know all the option.\n\tYou won't be able to select anything later"
   read_input_text "Enable Automatic Mode"
   if [[ $OPTION == y ]]; then
     $EDITOR ${AUI_DIR}/lilo.automode
@@ -442,12 +442,12 @@ install_basic_setup(){
   package_install "zip unzip unrar p7zip lzop cpio"
   pause_function
   print_title "avahi - https://wiki.archlinux.org/index.php/Avahi"
-  print_info "Avahi is a free Zero Configuration Networking (Zeroconf) implementation, including a system for multicast DNS/DNS-SD discovery. It allows programs to publish and discovers services and hosts running on a local network with no specific configuration."
+  print_info "Avahi is a free Zero Configuration Networking (Zeroconf) implementation, including a system for multicast DNS/DNS-SD discovery. It allows programs to publish and discovers services and hosts running on a local network with no specific configuration"
   package_install "avahi nss-mdns"
   is_package_installed "avahi" && system_ctl enable avahi-daemon
   pause_function
   print_title "ALSA - https://wiki.archlinux.org/index.php/Alsa"
-  print_info "The Advanced Linux Sound Architecture (ALSA) is a Linux kernel component intended to replace the original Open Sound System (OSSv3) for providing device drivers for sound cards."
+  print_info "The Advanced Linux Sound Architecture (ALSA) is a Linux kernel component intended to replace the original Open Sound System (OSSv3) for providing device drivers for sound cards"
   package_install "alsa-utils alsa-plugins"
   pause_function
   print_title "Pulseaudio - https://wiki.archlinux.org/index.php/Pulseaudio"
@@ -463,7 +463,7 @@ install_basic_setup(){
 #SSH {{{
 install_ssh(){
   print_title "SSH - https://wiki.archlinux.org/index.php/Ssh"
-  print_info "Secure Shell (SSH) is a network protocol that allows data to be exchanged over a secure channel between two computers."
+  print_info "Secure Shell (SSH) is a network protocol that allows data to be exchanged over a secure channel between two computers"
   read_input_text "Install ssh" $SSH
   if [[ $OPTION == y ]]; then
     package_install "openssh"
@@ -508,7 +508,7 @@ install_ssh(){
 #NFS {{{
 install_nfs(){
   print_title "NFS - https://wiki.archlinux.org/index.php/Nfs"
-  print_info "NFS allowing a user on a client computer to access files over a network in a manner similar to how local storage is accessed."
+  print_info "NFS allowing a user on a client computer to access files over a network in a manner similar to how local storage is accessed"
   read_input_text "Install nfs" $NFS
   if [[ $OPTION == y ]]; then
     package_install "nfs-utils"
@@ -522,7 +522,7 @@ install_nfs(){
 #ZSH {{{
 install_zsh(){
   print_title "ZSH - https://wiki.archlinux.org/index.php/Zsh"
-  print_info "Zsh is a powerful shell that operates as both an interactive shell and as a scripting language interpreter. "
+  print_info "Zsh is a powerful shell that operates as both an interactive shell and as a scripting language interpreter "
   read_input_text "Install zsh" $ZSH
   if [[ $OPTION == y ]]; then
     package_install "zsh"
@@ -547,7 +547,7 @@ install_zsh(){
 #READAHEAD {{{
 enable_readahead(){
   print_title "Readahead - https://wiki.archlinux.org/index.php/Improve_Boot_Performance"
-  print_info "Systemd comes with its own readahead implementation, this should in principle improve boot time. However, depending on your kernel version and the type of your hard drive, your mileage may vary (i.e. it might be slower)."
+  print_info "Systemd comes with its own readahead implementation, this should in principle improve boot time. However, depending on your kernel version and the type of your hard drive, your mileage may vary (i.e. it might be slower)"
   read_input_text "Enable Readahead" $READAHEAD
   if [[ $OPTION == y ]]; then
     system_ctl enable systemd-readahead-collect
@@ -559,7 +559,7 @@ enable_readahead(){
 #ZRAM {{{
 install_zram (){
   print_title "ZRAM - https://wiki.archlinux.org/index.php/Maximizing_Performance"
-  print_info "Zram creates a device in RAM and compresses it. If you use for swap means that part of the RAM can hold much more information but uses more CPU. Still, it is much quicker than swapping to a hard drive. If a system often falls back to swap, this could improve responsiveness. Zram is in mainline staging (therefore its not stable yet, use with caution)."
+  print_info "Zram creates a device in RAM and compresses it. If you use for swap means that part of the RAM can hold much more information but uses more CPU. Still, it is much quicker than swapping to a hard drive. If a system often falls back to swap, this could improve responsiveness. Zram is in mainline staging (therefore its not stable yet, use with caution)"
   read_input_text "Install Zram" $ZRAM
   if [[ $OPTION == y ]]; then
     aur_package_install "zramswap"
@@ -571,7 +571,7 @@ install_zram (){
 #TLP {{{
 install_tlp(){
   print_title "TLP - https://wiki.archlinux.org/index.php/Tlp"
-  print_info "TLP is an advanced power management tool for Linux. It is a pure command line tool with automated background tasks and does not contain a GUI."
+  print_info "TLP is an advanced power management tool for Linux. It is a pure command line tool with automated background tasks and does not contain a GUI"
   read_input_text "Install TLP" $TLP
   if [[ $OPTION == y ]]; then
     package_install "tlp"
@@ -586,7 +586,7 @@ install_tlp(){
 #XORG {{{
 install_xorg(){
   print_title "Xorg - https://wiki.archlinux.org/index.php/Xorg"
-  print_info "Xorg is the public, open-source implementation of the X window system version 11."
+  print_info "Xorg is the public, open-source implementation of the X window system version 11"
   echo "Installing X-Server (req. for Desktopenvironment, GPU Drivers, Keyboardlayout,...)"
   package_install "xorg-server xorg-apps xorg-server-xwayland xorg-xinit xorg-xkill xorg-xinput xf86-input-libinput"
   package_install "mesa"
@@ -597,7 +597,7 @@ install_xorg(){
 #FONT CONFIGURATION {{{
 font_config(){
   print_title "Fonts Configuration - https://wiki.archlinux.org/index.php/Font_Configuration"
-  print_info "Fontconfig is a library designed to provide a list of available fonts to applications, and also for configuration for how fonts get rendered."
+  print_info "Fontconfig is a library designed to provide a list of available fonts to applications, and also for configuration for how fonts get rendered"
   read_input_text "Install Fontconfig" $FONTCONFIG
   if [[ $OPTION == y ]]; then
     pacman -S --asdeps --noconfirm --needed cairo fontconfig freetype2
@@ -688,7 +688,7 @@ install_video_cards(){
 #CUPS {{{
 install_cups(){
   print_title "CUPS - https://wiki.archlinux.org/index.php/Cups"
-  print_info "CUPS is the standards-based, open source printing system developed by Apple Inc. for Mac OS X and other UNIX-like operating systems."
+  print_info "CUPS is the standards-based, open source printing system developed by Apple Inc. for Mac OS X and other UNIX-like operating systems"
   read_input_text "Install CUPS (aka Common Unix Printing System)" $CUPS
   if [[ $OPTION == y ]]; then
     package_install "cups cups-filters ghostscript gsfonts"
@@ -837,7 +837,7 @@ install_desktop_environment(){
     while true
     do
       print_title "Display manager - https://wiki.archlinux.org/index.php/Display_Manager"
-      print_info "A display manager, or login manager, is a graphical interface screen that is displayed at the end of the boot process in place of the default shell."
+      print_info "A display manager, or login manager, is a graphical interface screen that is displayed at the end of the boot process in place of the default shell"
       echo " 1) $(menu_item "entrance-git" "Entrance") $AUR"
       echo " 2) $(menu_item "gdm" "GDM")"
       echo " 3) $(menu_item "lightdm" "LightDM")"
@@ -1003,7 +1003,7 @@ install_desktop_environment(){
   } #}}}
 
   print_title "Desktop environment/Window manager"
-  print_info "A DE provide a complete GUI for a system by bundling together a variety of X clients written using a common widget toolkit and set of libraries.\n\nA window manager is one component of a system's graphical user interface."
+  print_info "A DE provide a complete GUI for a system by bundling together a variety of X clients written using a common widget toolkit and set of libraries.\n\nA window manager is one component of a system's graphical user interface"
 
   echo -e "Select your DE or WM:\n"
   echo " --- DE ---         --- WM ---"
@@ -1023,7 +1023,7 @@ install_desktop_environment(){
     1)
       #CINNAMON {{{
       print_title "Cinnamon - https://wiki.archlinux.org/index.php/Cinnamon"
-      print_info "Cinnamon is a fork of GNOME Shell, initially developed by Linux Mint. It attempts to provide a more traditional user environment based on the desktop metaphor, like GNOME 2. Cinnamon uses Muffin, a fork of the GNOME 3 window manager Mutter, as its window manager."
+      print_info "Cinnamon is a fork of GNOME Shell, initially developed by Linux Mint. It attempts to provide a more traditional user environment based on the desktop metaphor, like GNOME 2. Cinnamon uses Muffin, a fork of the GNOME 3 window manager Mutter, as its window manager"
       package_install "cinnamon nemo-fileroller nemo-preview"
       # config xinitrc
       config_xinitrc "cinnamon-session"
@@ -1036,7 +1036,7 @@ install_desktop_environment(){
     2)
       #DEEPIN {{{
       print_title "Deepin - http://www.linuxdeepin.com"
-      print_info "The desktop interface and applications feature an intuitive and elegant design. Moving around, sharing and searching etc. has become simply a joyful experience."
+      print_info "The desktop interface and applications feature an intuitive and elegant design. Moving around, sharing and searching etc. has become simply a joyful experience"
       package_install "deepin deepin-extra lightdm-gtk-greeter"
       # config xinitrc
       config_xinitrc "startdde"
@@ -1063,7 +1063,7 @@ install_desktop_environment(){
     4)
       #GNOME {{{
       print_title "Gnome - https://wiki.archlinux.org/index.php/GNOME"
-      print_info "GNOME is a desktop environment and graphical user interface that runs on top of a computer operating system. It is composed entirely of free and open source software. It is an international project that includes creating software development frameworks, selecting application software for the desktop, and working on the programs that manage application launching, file handling, and window and task management."
+      print_info "GNOME is a desktop environment and graphical user interface that runs on top of a computer operating system. It is composed entirely of free and open source software. It is an international project that includes creating software development frameworks, selecting application software for the desktop, and working on the programs that manage application launching, file handling, and window and task management"
       package_install "gnome gnome-extra gnome-software gnome-initial-setup"
       package_install "deja-dup gedit-plugins gpaste gnome-tweak-tool gnome-power-manager"
       aur_package_install "nautilus-share"
@@ -1081,7 +1081,7 @@ install_desktop_environment(){
     5)
       #KDE {{{
       print_title "KDE - https://wiki.archlinux.org/index.php/KDE"
-      print_info "KDE is an international free software community producing an integrated set of cross-platform applications designed to run on Linux, FreeBSD, Microsoft Windows, Solaris and Mac OS X systems. It is known for its Plasma Desktop, a desktop environment provided as the default working environment on many Linux distributions."
+      print_info "KDE is an international free software community producing an integrated set of cross-platform applications designed to run on Linux, FreeBSD, Microsoft Windows, Solaris and Mac OS X systems. It is known for its Plasma Desktop, a desktop environment provided as the default working environment on many Linux distributions"
       package_install "plasma kf5 sddm"
       package_install "ark dolphin dolphin-plugins kio-extras kdeconnect quota-tools gwenview kipi-plugins kate kcalc konsole spectacle okular kdeutils-sweeper kwalletmanager"
       is_package_installed "cups" && package_install "print-manager"
@@ -1142,7 +1142,7 @@ install_desktop_environment(){
     6)
       #LXQT {{{
       print_title "LXQT - http://wiki.archlinux.org/index.php/lxqt"
-      print_info "LXQt is the Qt port and the upcoming version of LXDE, the Lightweight Desktop Environment. It is the product of the merge between the LXDE-Qt and the Razor-qt projects: A lightweight, modular, blazing-fast and user-friendly desktop environment."
+      print_info "LXQt is the Qt port and the upcoming version of LXDE, the Lightweight Desktop Environment. It is the product of the merge between the LXDE-Qt and the Razor-qt projects: A lightweight, modular, blazing-fast and user-friendly desktop environment"
       package_install "lxqt openbox oxygen-icons qtcurve"
       package_install "leafpad epdfview"
       mkdir -p /home/${username}/.config/lxqt
@@ -1161,7 +1161,7 @@ install_desktop_environment(){
     7)
       #MATE {{{
       print_title "Mate - https://wiki.archlinux.org/index.php/Mate"
-      print_info "The MATE Desktop Environment is a fork of GNOME 2 that aims to provide an attractive and intuitive desktop to Linux users using traditional metaphors."
+      print_info "The MATE Desktop Environment is a fork of GNOME 2 that aims to provide an attractive and intuitive desktop to Linux users using traditional metaphors"
       package_install "mate mate-extra mate-applet-dock mate-menu  mate-media blueman network-manager-applet mate-power-manager system-config-printer mate-disk-utility accountsservice"
       yaourt -S --noconfirm --needed mate-tweak brisk-menu
       # config xinitrc
@@ -1175,7 +1175,7 @@ install_desktop_environment(){
     8)
       #XFCE {{{
       print_title "XFCE - https://wiki.archlinux.org/index.php/Xfce"
-      print_info "Xfce is a free software desktop environment for Unix and Unix-like platforms, such as Linux, Solaris, and BSD. It aims to be fast and lightweight, while still being visually appealing and easy to use."
+      print_info "Xfce is a free software desktop environment for Unix and Unix-like platforms, such as Linux, Solaris, and BSD. It aims to be fast and lightweight, while still being visually appealing and easy to use"
       package_install "xfce4 xfce4-goodies xarchiver mupdf"
       # config xinitrc
       config_xinitrc "startxfce4"
@@ -1187,7 +1187,7 @@ install_desktop_environment(){
     9)
       #BUDGIE {{{
       print_title "Budgie - https://wiki.archlinux.org/index.php/Budgie_Desktop"
-      print_info "Budgie is the default desktop of Solus Operating System, written from scratch. Besides a more modern design, Budgie can emulate the look and feel of the GNOME 2 desktop."
+      print_info "Budgie is the default desktop of Solus Operating System, written from scratch. Besides a more modern design, Budgie can emulate the look and feel of the GNOME 2 desktop"
       package_install "gnome gnome-extra gnome-software gnome-initial-setup telepathy"
       package_install "deja-dup gedit-plugins gpaste gnome-tweak-tool gnome-power-manager"
       package_install "budgie-desktop"
@@ -1206,7 +1206,7 @@ install_desktop_environment(){
     10)
       #AWESOME {{{
       print_title "Awesome - http://wiki.archlinux.org/index.php/Awesome"
-      print_info "awesome is a highly configurable, next generation framework window manager for X. It is very fast, extensible and licensed under the GNU GPLv2 license."
+      print_info "awesome is a highly configurable, next generation framework window manager for X. It is very fast, extensible and licensed under the GNU GPLv2 license"
       package_install "awesome"
       package_install "lxappearance"
       package_install "leafpad epdfview nitrogen"
@@ -1225,7 +1225,7 @@ install_desktop_environment(){
     11)
       #FLUXBOX {{{
       print_title "Fluxbox - http://wiki.archlinux.org/index.php/Fluxbox"
-      print_info "Fluxbox is yet another window manager for X11. It is based on the (now abandoned) Blackbox 0.61.1 code, but with significant enhancements and continued development. Fluxbox is very light on resources and fast, yet provides interesting window management tools such as tabbing and grouping."
+      print_info "Fluxbox is yet another window manager for X11. It is based on the (now abandoned) Blackbox 0.61.1 code, but with significant enhancements and continued development. Fluxbox is very light on resources and fast, yet provides interesting window management tools such as tabbing and grouping"
       package_install "fluxbox menumaker"
       package_install "lxappearance"
       package_install "leafpad epdfview"
@@ -1239,7 +1239,7 @@ install_desktop_environment(){
     12)
       #I3 {{{
       print_title "i3 - https://wiki.archlinux.org/index.php/I3"
-      print_info "i3 is a dynamic tiling window manager inspired by wmii that is primarily targeted at developers and advanced users. The stated goals for i3 include clear documentation, proper multi-monitor support, a tree structure for windows, and different modes like in vim."
+      print_info "i3 is a dynamic tiling window manager inspired by wmii that is primarily targeted at developers and advanced users. The stated goals for i3 include clear documentation, proper multi-monitor support, a tree structure for windows, and different modes like in vim"
       package_install "i3"
       package_install "dmenu"
       # config xinitrc
@@ -1252,7 +1252,7 @@ install_desktop_environment(){
     13)
       #OPENBOX {{{
       print_title "Openbox - http://wiki.archlinux.org/index.php/Openbox"
-      print_info "Openbox is a lightweight and highly configurable window manager with extensive standards support."
+      print_info "Openbox is a lightweight and highly configurable window manager with extensive standards support"
       package_install "openbox obconf obmenu menumaker"
       package_install "lxappearance"
       package_install "leafpad epdfview nitrogen"
@@ -1269,7 +1269,7 @@ install_desktop_environment(){
     14)
       #XMONAD {{{
       print_title "Xmonad - http://wiki.archlinux.org/index.php/Xmonad"
-      print_info "xmonad is a tiling window manager for X. Windows are arranged automatically to tile the screen without gaps or overlap, maximizing screen use. Window manager features are accessible from the keyboard: a mouse is optional."
+      print_info "xmonad is a tiling window manager for X. Windows are arranged automatically to tile the screen without gaps or overlap, maximizing screen use. Window manager features are accessible from the keyboard: a mouse is optional"
       package_install "xmonad xmonad-contrib"
       # config xinitrc
       config_xinitrc "xmonad"
@@ -1325,7 +1325,7 @@ install_nm_wicd(){
   case "$OPTION" in
     1)
       print_title "NetworkManager - https://wiki.archlinux.org/index.php/Networkmanager"
-      print_info "NetworkManager is a program for providing detection and configuration for systems to automatically connect to network. NetworkManager's functionality can be useful for both wireless and wired networks."
+      print_info "NetworkManager is a program for providing detection and configuration for systems to automatically connect to network. NetworkManager's functionality can be useful for both wireless and wired networks"
       if [[ ${KDE} -eq 1 ]]; then
         package_install "networkmanager dnsmasq plasma-nm networkmanager-qt"
       else
@@ -1346,7 +1346,7 @@ install_nm_wicd(){
       ;;
     2)
       print_title "WICD - https://wiki.archlinux.org/index.php/Wicd"
-      print_info "Wicd is a network connection manager that can manage wireless and wired interfaces, similar and an alternative to NetworkManager."
+      print_info "Wicd is a network connection manager that can manage wireless and wired interfaces, similar and an alternative to NetworkManager"
       if [[ ${KDE} -eq 1 ]]; then
         aur_package_install "wicd wicd-kde"
       else
@@ -1358,7 +1358,7 @@ install_nm_wicd(){
       ;;
     3)
       print_title "Connman - https://wiki.archlinux.org/index.php/Connman"
-      print_info "ConnMan is an alternative to NetworkManager and Wicd and was created by Intel and the Moblin project for use with embedded devices."
+      print_info "ConnMan is an alternative to NetworkManager and Wicd and was created by Intel and the Moblin project for use with embedded devices"
       package_install "connman"
       # ConnMan daemon
       system_ctl enable connman
@@ -1370,7 +1370,7 @@ install_nm_wicd(){
 #USB 3G MODEM {{{
 install_usb_modem(){
   print_title "USB 3G Modem - https://wiki.archlinux.org/index.php/USB_3G_Modem"
-  print_info "A number of mobile telephone networks around the world offer mobile internet connections over UMTS (or EDGE or GSM) using a portable USB modem device."
+  print_info "A number of mobile telephone networks around the world offer mobile internet connections over UMTS (or EDGE or GSM) using a portable USB modem device"
   read_input_text "Install usb 3G modem support" $USBMODEM
   if [[ $OPTION == y ]]; then
     package_install "usbutils usb_modeswitch"
@@ -1710,7 +1710,7 @@ install_system_apps(){
           ;;
         10)
           print_title "UFW - https://wiki.archlinux.org/index.php/Ufw"
-          print_info "Ufw stands for Uncomplicated Firewall, and is a program for managing a netfilter firewall. It provides a command line interface and aims to be uncomplicated and easy to use."
+          print_info "Ufw stands for Uncomplicated Firewall, and is a program for managing a netfilter firewall. It provides a command line interface and aims to be uncomplicated and easy to use"
           is_package_installed "firewalld" && package_remove "firewalld"
           aur_package_install "ufw gufw"
           system_ctl enable ufw.service
@@ -2743,7 +2743,7 @@ clean_orphan_packages(){
 #RECONFIGURE SYSTEM {{{
 reconfigure_system(){
   print_title "KEYMAP - https://wiki.archlinux.org/index.php/KEYMAP"
-  print_info "The KEYMAP variable is specified in the /etc/rc.conf file. It defines what keymap the keyboard is in the virtual consoles. Keytable files are provided by the kbd package."
+  print_info "The KEYMAP variable is specified in the /etc/rc.conf file. It defines what keymap the keyboard is in the virtual consoles. Keytable files are provided by the kbd package"
   OPTION=n
   while [[ $OPTION != y ]]; do
     getkeymap
@@ -2752,12 +2752,12 @@ reconfigure_system(){
   localectl set-keymap ${KEYMAP}
 
   print_title "hostname - https://wiki.archlinux.org/index.php/HOSTNAME"
-  print_info "A host name is a unique name created to identify a machine on a network.Host names are restricted to alphanumeric characters.\nThe hyphen (-) can be used, but a host name cannot start or end with it. Length is restricted to 63 characters."
+  print_info "A host name is a unique name created to identify a machine on a network.Host names are restricted to alphanumeric characters.\nThe hyphen (-) can be used, but a host name cannot start or end with it. Length is restricted to 63 characters"
   read -p "Hostname [ex: archlinux]: " HN
   hostnamectl set-hostname $HN
 
   print_title "Timezone - https://wiki.archlinux.org/index.php/Timezone"
-  print_info "In an operating system the time (clock) is determined by four parts: Time value, Time standard, Time Zone, and DST (Daylight Saving Time if applicable)."
+  print_info "In an operating system the time (clock) is determined by four parts: Time value, Time standard, Time Zone, and DST (Daylight Saving Time if applicable)"
   OPTION=n
   while [[ $OPTION != y ]]; do
     settimezone
@@ -2766,7 +2766,7 @@ reconfigure_system(){
   timedatectl set-timezone ${ZONE}/${SUBZONE}
 
   print_title "Hardware clock - https://wiki.archlinux.org/index.php/Internationalization"
-  print_info "This is set in /etc/adjtime. Set the hardware clock mode uniformly between your operating systems on the same machine. Otherwise, they will overwrite the time and cause clock shifts (which can cause time drift correction to be miscalibrated)."
+  print_info "This is set in /etc/adjtime. Set the hardware clock mode uniformly between your operating systems on the same machine. Otherwise, they will overwrite the time and cause clock shifts (which can cause time drift correction to be miscalibrated)"
   hwclock_list=('UTC' 'Localtime');
   PS3="$prompt1"
   select OPT in "${hwclock_list[@]}"; do
@@ -2862,8 +2862,8 @@ if is_package_installed "kdebase-workspace"; then KDE=1; fi
 
 while true
 do
-  print_title "ARCHLINUX INSTALL - https://github.com/helmuthdu/aui"
-  print_warning "USERNAME: ${username}"
+  print_title "Archlinux post install script"
+  print_warning "Username: ${username}"
   echo " 1) $(mainmenu_item "${checklist[1]}" "Basic Setup")"
   echo " 2) $(mainmenu_item "${checklist[2]}" "Desktop Environment|Window Manager")"
   echo " 3) $(mainmenu_item "${checklist[3]}" "Accessories applications")"
