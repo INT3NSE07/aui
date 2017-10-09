@@ -2843,6 +2843,9 @@ finish(){
   AUR_PKG_LIST="${AUI_DIR}/aur_pkg_list.log"
   pacman -Qm | awk '{print $1}' > $AUR_PKG_LIST
   less $AUR_PKG_LIST
+  # Enable graphical target
+  sudo systemctl disable multi-user.target || exit 1
+  sudo systemctl set-default graphical.target || exit 1
   print_title "Installation completed"
   #REBOOT
   read -p "Reboot your system [y/N]: " OPTION
