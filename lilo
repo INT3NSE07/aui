@@ -1171,7 +1171,7 @@ install_desktop_environment(){
       print_title "Mate - https://wiki.archlinux.org/index.php/Mate"
       print_info "The MATE Desktop Environment is a fork of GNOME 2 that aims to provide an attractive and intuitive desktop to Linux users using traditional metaphors"
       package_install "mate mate-extra mate-applet-dock mate-menu  mate-media blueman network-manager-applet mate-power-manager system-config-printer accountsservice"
-      aur_package_install "mate-tweak brisk-menu"
+      aur_package_install "mate-tweak brisk-menu papirus-icon-theme-git"
       MATE=1
       # config xinitrc
       config_xinitrc "mate-session"
