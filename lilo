@@ -466,7 +466,9 @@ install_basic_setup(){
   print_info "A file system (or filesystem) is a means to organize data expected to be retained after a program terminates by providing procedures to store, retrieve and update data, as well as manage the available space on the device(s) which contain it. A file system organizes data in an efficient manner and is tuned to the specific characteristics of the device."
   package_install "ntfs-3g dosfstools exfat-utils f2fs-tools fuse fuse-exfat autofs mtpfs"
   # Install yaourt
-  sudo pacman -U /var/cache/pacman/pkg/yaourt*
+  sudo pacman -U /var/cache/pacman/pkg/package-query* || exit 1
+  # Install yaourt
+  sudo pacman -U /var/cache/pacman/pkg/yaourt* || exit 1
   pause_function
 }
 #}}}
