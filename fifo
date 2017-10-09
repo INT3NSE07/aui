@@ -510,9 +510,14 @@ install_base_system(){
   rsync -arh --info=progress2 ~/packages/* /mnt/var/cache/pacman/pkg
   rm -rf /var/cache/pacman/pkg
   ln -s /mnt/var/cache/pacman/pkg /var/cache/pacman/pkg
+  arch_chroot "systemctl disable pacman-init.service choose-mirror.service"
+  arch_chroot "rm -r /etc/systemd/system/{choose-mirror.service,pacman-init.service,etc-pacman.d-gnupg.mount,getty@tty1.service.d}"
+  arch_chroot "rm /etc/systemd/scripts/choose-mirror"
   # Remove autologin scripts
   arch_chroot "rm /etc/systemd/system/getty@tty1.service.d/autologin.conf"
   arch_chroot "rm /root/{.automated_script.sh,.zlogin}"
+  arch_chroot "rm /etc/mkinitcpio-archiso.conf"
+  arch_chroot "rm -r /etc/initcpio"
   if [ $NETC -ne 0 ]; then
 	cp -aT /run/archiso/bootmnt/arch/boot/x86_64/vmlinuz /mnt/boot/vmlinuz-linux
 	mkdir -p /mnt/var/lib/pacman/sync/
