@@ -514,7 +514,6 @@ install_base_system(){
   arch_chroot "rm -r /etc/systemd/system/{choose-mirror.service,pacman-init.service,etc-pacman.d-gnupg.mount,getty@tty1.service.d}"
   arch_chroot "rm /etc/systemd/scripts/choose-mirror"
   # Remove autologin scripts
-  arch_chroot "rm /etc/systemd/system/getty@tty1.service.d/autologin.conf"
   arch_chroot "rm /root/{.automated_script.sh,.zlogin}"
   arch_chroot "rm /etc/mkinitcpio-archiso.conf"
   arch_chroot "rm -r /etc/initcpio"
