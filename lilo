@@ -465,6 +465,8 @@ install_basic_setup(){
   print_title "NTFS/FAT/exFAT/F2FS - https://wiki.archlinux.org/index.php/File_Systems"
   print_info "A file system (or filesystem) is a means to organize data expected to be retained after a program terminates by providing procedures to store, retrieve and update data, as well as manage the available space on the device(s) which contain it. A file system organizes data in an efficient manner and is tuned to the specific characteristics of the device."
   package_install "ntfs-3g dosfstools exfat-utils f2fs-tools fuse fuse-exfat autofs mtpfs"
+  # Install yaourt
+  sudo pacman -U /var/cache/pacman/pkg/yaourt*
   pause_function
 }
 #}}}
@@ -570,7 +572,7 @@ install_zram (){
   print_info "Zram creates a device in RAM and compresses it. If you use for swap means that part of the RAM can hold much more information but uses more CPU. Still, it is much quicker than swapping to a hard drive. If a system often falls back to swap, this could improve responsiveness. Zram is in mainline staging (therefore its not stable yet, use with caution)"
   read_input_text "Install Zram" $ZRAM
   if [[ $OPTION == y ]]; then
-    aur_package_install "zramswap"
+    yaourt -U /var/cache/pkg/zramswap* || exit 1
     system_ctl enable zramswap
     pause_function
   fi
@@ -869,8 +871,6 @@ install_desktop_environment(){
           3)
             if [[ ${KDE} -eq 1 ]]; then
               package_install "lightdm lightdm-kde-greeter"
-            elif [[ ${MATE} -eq 1 ]]; then
-              package_install "lightdm lightdm-gtk3-greeter"
             else
               package_install "lightdm lightdm-gtk-greeter"
             fi
@@ -1171,7 +1171,9 @@ install_desktop_environment(){
       print_title "Mate - https://wiki.archlinux.org/index.php/Mate"
       print_info "The MATE Desktop Environment is a fork of GNOME 2 that aims to provide an attractive and intuitive desktop to Linux users using traditional metaphors"
       package_install "mate mate-extra mate-applet-dock mate-menu  mate-media blueman network-manager-applet mate-power-manager system-config-printer accountsservice"
-      aur_package_install "mate-tweak brisk-menu papirus-icon-theme-git"
+      yaourt -U /var/cache/pkg/mate-tweak* || exit 1
+      yaourt -U /var/cache/pkg/brisk-menu* || exit 1
+      yaourt -U /var/cache/pkg/papirus-icon-theme-git* || exit 1
       MATE=1
       # config xinitrc
       config_xinitrc "mate-session"
@@ -1305,7 +1307,7 @@ install_desktop_environment(){
       package_install "xdg-user-dirs-gtk"
       package_install "pavucontrol"
       package_install "ttf-bitstream-vera ttf-dejavu"
-      aur_package_install "gnome-defaults-list"
+      yaourt -U /var/cache/pkg/gnome-defaults-list* || exit 1
       is_package_installed "cups" && package_install "system-config-printer gtk3-print-backends"
       is_package_installed "samba" && package_install "gvfs-smb"
     fi
@@ -1433,7 +1435,7 @@ install_accessories_apps(){
           package_install "galculator"
           ;;
         5)
-          aur_package_install "pamac-aur"
+          yaourt -U /var/cache/pkg/pamac-aur* || exit 1
           ;;
         6)
           aur_package_install "pyrenamer"
@@ -1862,7 +1864,7 @@ install_internet_apps(){
             for OPT in ${OPTIONS[@]}; do
               case "$OPT" in
                 1)
-                  aur_package_install "google-chrome"
+                  yaourt -U /var/cache/pkg/google-chrome* || exit 1
                   ;;
                 2)
                   package_install "chromium"
@@ -2059,7 +2061,7 @@ install_internet_apps(){
                   aur_package_install "viber"
                   ;;
                 7)
-                  aur_package_install "telegram-desktop-bin"
+                  yaourt -U /var/cache/pkg/telegram-desktop-bin* || exit 1
                   ;;
                 8)
                   aur_package_install "qtox-git"
