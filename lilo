@@ -1176,6 +1176,7 @@ install_desktop_environment(){
       yaourt -U /var/cache/pacman/pkg/mate-tweak* --noconfirm --needed || exit 1
       yaourt -U /var/cache/pacman/pkg/brisk-menu* --noconfirm --needed || exit 1
       yaourt -U /var/cache/pacman/pkg/papirus-icon-theme-git* --noconfirm --needed || exit 1
+      yaourt -U /var/cache/pacman/pkg/adapta-gtk-theme* --noconfirm --needed || exit 1
       MATE=1
       # config xinitrc
       config_xinitrc "mate-session"
