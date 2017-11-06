@@ -1172,7 +1172,7 @@ install_desktop_environment(){
       #MATE {{{
       print_title "Mate - https://wiki.archlinux.org/index.php/Mate"
       print_info "The MATE Desktop Environment is a fork of GNOME 2 that aims to provide an attractive and intuitive desktop to Linux users using traditional metaphors"
-      package_install "mate mate-extra mate-applet-dock mate-menu  mate-media blueman network-manager-applet mate-power-manager system-config-printer accountsservice"
+      package_install "archiso time mate mate-extra mate-applet-dock mate-menu  mate-media blueman network-manager-applet mate-power-manager system-config-printer accountsservice"
       yaourt -U /var/cache/pacman/pkg/mate-tweak* --noconfirm --needed || exit 1
       yaourt -U /var/cache/pacman/pkg/brisk-menu* --noconfirm --needed || exit 1
       yaourt -U /var/cache/pacman/pkg/papirus-icon-theme-git* --noconfirm --needed || exit 1
